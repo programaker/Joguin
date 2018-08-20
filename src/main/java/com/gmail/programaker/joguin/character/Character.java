@@ -5,25 +5,40 @@ public class Character {
     private String name;
     private Gender gender;
     private int age;
-    private float height;
 
     public long getId() {
         return id;
+    }
+
+    public Character setId(long id) {
+        this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
+    public Character setName(String name) {
+        this.name = name;
+        return this;
+    }
+
     public Gender getGender() {
         return gender;
+    }
+
+    public Character setGender(Gender gender) {
+        this.gender = gender;
+        return this;
     }
 
     public int getAge() {
         return age;
     }
 
-    public float getHeight() {
-        return height;
+    public Character setAge(int age) {
+        this.age = age;
+        return this;
     }
 }
