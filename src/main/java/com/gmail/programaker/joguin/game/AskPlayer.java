@@ -35,4 +35,6 @@ public final class AskPlayer {
 
         return parsedAnswer;
     }
+
+    private AskPlayer(){}
 }

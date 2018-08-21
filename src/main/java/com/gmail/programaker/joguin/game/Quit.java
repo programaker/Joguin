@@ -3,7 +3,7 @@ package com.gmail.programaker.joguin.game;
 import java.util.Iterator;
 import java.util.function.Consumer;
 
-public final class Quit implements GameStep {
+public class Quit implements GameStep {
     private final QuitMessages messages;
 
     public Quit(QuitMessages messages) {

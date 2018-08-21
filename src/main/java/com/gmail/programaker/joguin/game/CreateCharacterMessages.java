@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @PropertySource("classpath:CreateCharacterMessages.properties")
-public final class CreateCharacterMessages {
+public class CreateCharacterMessages {
     private final String askToCreateOrQuit;
     private final String askName;
     private final String askGender;

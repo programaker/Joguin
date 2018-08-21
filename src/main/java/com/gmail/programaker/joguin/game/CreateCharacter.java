@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public final class CreateCharacter implements GameStep {
+public class CreateCharacter implements GameStep {
     private final Messages allMessages;
 
     public CreateCharacter(Messages messages) {
@@ -24,6 +24,7 @@ public final class CreateCharacter implements GameStep {
             String::toLowerCase,
             this::validateChoice
         );
+
         if (choice.equals("q")) {
             return new Quit(allMessages.getQuitMessages());
         }
