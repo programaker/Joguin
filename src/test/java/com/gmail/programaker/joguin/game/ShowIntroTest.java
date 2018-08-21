@@ -2,7 +2,6 @@ package com.gmail.programaker.joguin.game;
 
 import com.gmail.programaker.joguin.TestConfig;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,8 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.gmail.programaker.joguin.TestConfig.blackHoleConsole;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)
@@ -87,6 +87,7 @@ public class ShowIntroTest {
         assertTrue("Should have gone to Continue step", nextStep instanceof Continue);
     }
 
+    @Test
     public void givenInvalidOption() {
         List<String> fakeConsole = new ArrayList<>();
 
@@ -96,6 +97,7 @@ public class ShowIntroTest {
         );
 
         int i = 0;
+        assertEquals(intro, fakeConsole.get(i++));
 
         assertEquals(start, fakeConsole.get(i++));
         assertEquals(errorInvalidOption, fakeConsole.get(i++));
