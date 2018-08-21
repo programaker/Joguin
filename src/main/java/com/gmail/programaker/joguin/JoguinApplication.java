@@ -7,10 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.io.PrintStream;
-import java.util.Iterator;
 import java.util.Scanner;
-import java.util.function.Consumer;
 
 @SpringBootApplication
 public class JoguinApplication implements CommandLineRunner {
@@ -23,7 +20,7 @@ public class JoguinApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        try (Scanner scanner = new Scanner(System.in)) {
+        try (Scanner scanner = new Scanner(System.in).useDelimiter("\n")) {
             GameStep step = game.start();
 
             while (!step.gameOver()) {
