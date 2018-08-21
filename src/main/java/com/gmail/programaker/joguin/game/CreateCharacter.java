@@ -7,14 +7,16 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public final class CreateCharacter implements GameStep {
-    private final CreateCharacterMessages messages;
+    private final Messages allMessages;
 
-    public CreateCharacter(CreateCharacterMessages messages) {
-        this.messages = messages;
+    public CreateCharacter(Messages messages) {
+        this.allMessages = messages;
     }
 
     @Override
     public GameStep interactWithPlayer(Consumer<String> println, Iterator<String> playerAnswers) {
+        CreateCharacterMessages messages = allMessages.getCreateCharacterMessages();
+
         String choice = AskPlayer.to(messages.createOrQuit(),
             messages.invalidChoice(),
             println,
@@ -23,7 +25,7 @@ public final class CreateCharacter implements GameStep {
             this::validateChoice
         );
         if (choice.equals("q")) {
-            return new Quit();
+            return new Quit(allMessages.getQuitMessages());
         }
 
         String name = AskPlayer.to(messages.informName(),

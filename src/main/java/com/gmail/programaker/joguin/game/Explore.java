@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 
 public final class Explore implements GameStep {
     @Override
-    public GameStep interactWithPlayer(Consumer<String> askPlayer, Iterator<String> playerAnswers) {
-        return null;
+    public GameStep interactWithPlayer(Consumer<String> println, Iterator<String> playerAnswers) {
+        return new GameOver();
     }
 }

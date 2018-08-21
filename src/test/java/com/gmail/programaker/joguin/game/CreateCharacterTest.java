@@ -9,16 +9,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.*;
-import java.util.function.Consumer;
 
+import static com.gmail.programaker.joguin.TestConfig.blackHoleConsole;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)
 public class CreateCharacterTest {
-    private final Consumer<String> blackHoleConsole = message -> {};
-
     private final String askToCreateOrQuit = "(C)reate character. (Q)uit";
     private final String askName = "Name:";
     private final String askGender = "Gender - (F)emale, (M)ale, (O)ther:";
@@ -28,10 +26,10 @@ public class CreateCharacterTest {
     private final String errorInvalidGender = "Invalid gender";
     private final String errorInvalidAge = "Invalid age. You must be at least 18 to fight for Earth";
 
-    @Autowired
-    private CreateCharacterMessages messages;
-
     private CreateCharacter createCharacter;
+
+    @Autowired
+    private Messages messages;
 
     @Before
     public void setup() {
