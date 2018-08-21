@@ -7,13 +7,16 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public enum Gender {
+    NONE(""),
     FEMALE("F"),
     MALE("M"),
     OTHER("O"),
     ;
 
-    public static Optional<Gender> byCode(String code) {
-        return Optional.ofNullable(code).map(c -> gendersByCode.get(c.toUpperCase()));
+    public static Gender byCode(String code) {
+        return Optional.ofNullable(code)
+            .map(c -> gendersByCode.get(c.toUpperCase()))
+            .orElse(NONE);
     }
 
     private final String code;
