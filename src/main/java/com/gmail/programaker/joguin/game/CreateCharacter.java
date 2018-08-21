@@ -62,7 +62,7 @@ public final class CreateCharacter implements GameStep {
     }
 
     private boolean validateName(String name) {
-        return !name.isEmpty();
+        return !name.trim().isEmpty();
     }
 
     private boolean validateGender(Gender gender) {
