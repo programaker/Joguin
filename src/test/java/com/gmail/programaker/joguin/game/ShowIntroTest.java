@@ -26,7 +26,7 @@ public class ShowIntroTest {
         "\n" +
         "Your job is to lead humanity's army in a mission to destroy all Terraform Devices. \n" +
         "We managed to discover their locations and they will be sent to you, but beware! The Devices \n" +
-        "are well guarded by Zorblaxian warriors!";
+        "have strong defenses!";
 
     private final String start = "\n(N)ew Game, (C)ontinue, (Q)uit:";
     private final String errorInvalidOption = "Invalid option";
