@@ -17,10 +17,10 @@ import static org.junit.Assert.assertTrue;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)
 public class CreateCharacterTest {
-    private final String askToCreateOrQuit = "(C)reate character. (Q)uit";
-    private final String askName = "Name:";
-    private final String askGender = "Gender - (F)emale, (M)ale, (O)ther:";
-    private final String askAge = "Age:";
+    private final String askToCreateOrQuit = "\n(C)reate character. (Q)uit";
+    private final String askName = "\nName:";
+    private final String askGender = "\nGender - (F)emale, (M)ale, (O)ther:";
+    private final String askAge = "\nAge:";
     private final String errorInvalidChoice = "Invalid choice";
     private final String errorInvalidName = "Invalid name";
     private final String errorInvalidGender = "Invalid gender";

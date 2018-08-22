@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
 @ContextConfiguration(classes = TestConfig.class)
 public class ShowIntroTest {
     private final String intro =
-        "The Zorblaxians arrived on Earth planning to conquer it to expand their galactic empire.\n" +
+        "\nThe Zorblaxians arrived on Earth planning to conquer it to expand their galactic empire.\n" +
         "\n" +
         "To do so, they installed several Terraform Devices around the planet, to make our environment \n" +
         "suitable for their biology, extinguishing all earthlings in the process.\n" +
@@ -30,7 +30,7 @@ public class ShowIntroTest {
         "We managed to discover their locations and they will be sent to you, but beware! The Devices \n" +
         "are well guarded by Zorblaxian warriors!";
 
-    private final String start = "(N)ew Game, (C)ontinue, (Q)uit:";
+    private final String start = "\n(N)ew Game, (C)ontinue, (Q)uit:";
     private final String errorInvalidOption = "Invalid option";
 
     private ShowIntro showIntro;

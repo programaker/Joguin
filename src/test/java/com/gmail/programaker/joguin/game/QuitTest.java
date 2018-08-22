@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)
 public class QuitTest {
-    private final String wantToSaveGame = "Save the game? (Y/N):";
+    private final String wantToSaveGame = "\nSave the game? (Y/N):";
     private final String errorInvalidOption = "Invalid option";
 
     private Quit quit;
