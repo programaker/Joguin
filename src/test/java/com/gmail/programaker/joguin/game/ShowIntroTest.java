@@ -1,7 +1,6 @@
 package com.gmail.programaker.joguin.game;
 
 import com.gmail.programaker.joguin.TestConfig;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import java.util.List;
 
 import static com.gmail.programaker.joguin.TestConfig.blackHoleConsole;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)
