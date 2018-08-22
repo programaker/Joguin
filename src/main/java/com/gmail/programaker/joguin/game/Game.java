@@ -5,14 +5,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Game {
-    private final AllMessages allMessages;
+    private final ShowIntro showIntroStep;
 
     @Autowired
-    public Game(AllMessages allMessages) {
-        this.allMessages = allMessages;
+    public Game(ShowIntro showIntroStep) {
+        this.showIntroStep = showIntroStep;
     }
 
     public GameStep start() {
-        return new ShowIntro(allMessages);
+        return showIntroStep.start();
     }
 }

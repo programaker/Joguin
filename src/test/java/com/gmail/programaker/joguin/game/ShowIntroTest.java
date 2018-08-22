@@ -33,21 +33,14 @@ public class ShowIntroTest {
     private final String start = "\n(N)ew Game, (C)ontinue, (Q)uit:";
     private final String errorInvalidOption = "Invalid option";
 
-    private ShowIntro showIntro;
-
     @Autowired
-    private AllMessages allMessages;
-
-    @Before
-    public void setup() {
-        showIntro = new ShowIntro(allMessages);
-    }
+    private ShowIntro showIntro;
 
     @Test
     public void interactionsWithPlayer() {
         List<String> fakeConsole = new ArrayList<>();
 
-        showIntro.interactWithPlayer(
+        showIntro.start().interactWithPlayer(
             fakeConsole::add,
             Collections.singletonList("Q").iterator()
         );
@@ -59,39 +52,39 @@ public class ShowIntroTest {
 
     @Test
     public void whenThePlayerAsksToStartNewGame() {
-        GameStep nextStep = showIntro.interactWithPlayer(
+        GameStep nextStep = showIntro.start().interactWithPlayer(
             blackHoleConsole,
             Collections.singletonList("N").iterator()
         );
 
-        assertTrue("Should have gone to Create Character step", nextStep instanceof CreateCharacter);
+        assertEquals("Should have gone to Create Character step", "CreateCharacter", nextStep.name());
     }
 
     @Test
     public void whenThePlayerAsksToQuit() {
-        GameStep nextStep = showIntro.interactWithPlayer(
+        GameStep nextStep = showIntro.start().interactWithPlayer(
             blackHoleConsole,
             Collections.singletonList("Q").iterator()
         );
 
-        assertTrue("Should have gone to Quit step", nextStep instanceof Quit);
+        assertEquals("Should have gone to Quit step", "Quit", nextStep.name());
     }
 
     @Test
     public void whenThePlayerAsksToContinueGame() {
-        GameStep nextStep = showIntro.interactWithPlayer(
+        GameStep nextStep = showIntro.start().interactWithPlayer(
             blackHoleConsole,
             Collections.singletonList("C").iterator()
         );
 
-        assertTrue("Should have gone to Continue step", nextStep instanceof Continue);
+        assertEquals("Should have gone to Continue step", "Continue", nextStep.name());
     }
 
     @Test
     public void givenInvalidOption() {
         List<String> fakeConsole = new ArrayList<>();
 
-        showIntro.interactWithPlayer(
+        showIntro.start().interactWithPlayer(
             fakeConsole::add,
             Arrays.asList(" ", "meh", "N").iterator()
         );

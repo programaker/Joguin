@@ -1,7 +1,6 @@
 package com.gmail.programaker.joguin.game;
 
 import com.gmail.programaker.joguin.TestConfig;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,23 +25,16 @@ public class CreateCharacterTest {
     private final String errorInvalidGender = "Invalid gender";
     private final String errorInvalidAge = "Invalid age. You must be at least 18 to fight for Earth";
 
-    private CreateCharacter createCharacter;
-
     @Autowired
-    private AllMessages allMessages;
-
-    @Before
-    public void setup() {
-        createCharacter = new CreateCharacter(allMessages);
-    }
+    private CreateCharacter createCharacter;
 
     @Test
     public void interactionsWithPlayer() {
         List<String> fakeConsole = new ArrayList<>();
 
-        createCharacter.interactWithPlayer(
+        createCharacter.start().interactWithPlayer(
             fakeConsole::add,
-            playerAnswers("C", "Michael Poole", "M", "35")
+            Arrays.asList("C", "Michael Poole", "M", "35").iterator()
         );
 
         int i = 0;
@@ -54,19 +46,19 @@ public class CreateCharacterTest {
 
     @Test
     public void givenValidCharacterData() {
-        GameStep nextStep = createCharacter.interactWithPlayer(
+        GameStep nextStep = createCharacter.start().interactWithPlayer(
             blackHoleConsole,
-            playerAnswers("C", "Kitana", "F", "28")
+            Arrays.asList("C", "Kitana", "F", "28").iterator()
         );
 
-        assertTrue("Should have accepted the new character data and gone to Explore step", nextStep instanceof Explore);
+        assertEquals("Should have accepted the new character data and gone to Explore step", "Explore", nextStep.name());
     }
 
     @Test
     public void givenInvalidCharacterData() {
         List<String> fakeConsole = new ArrayList<>();
 
-        createCharacter.interactWithPlayer(
+        createCharacter.start().interactWithPlayer(
             fakeConsole::add,
             Arrays.asList(
                 //Choice attempts
@@ -109,15 +101,11 @@ public class CreateCharacterTest {
 
     @Test
     public void whenThePlayerAsksToQuit() {
-        GameStep nextStep = createCharacter.interactWithPlayer(
+        GameStep nextStep = createCharacter.start().interactWithPlayer(
             blackHoleConsole,
             Collections.singletonList("Q").iterator()
         );
 
-        assertTrue("Should have gone to Quit step", nextStep instanceof Quit);
-    }
-
-    private Iterator<String> playerAnswers(String choice, String charName, String charGender, String charAge) {
-        return Arrays.asList(choice, charName, charGender, charAge).iterator();
+        assertEquals("Should have gone to Quit step", "Quit", nextStep.name());
     }
 }

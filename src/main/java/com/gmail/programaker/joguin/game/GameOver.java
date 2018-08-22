@@ -5,6 +5,11 @@ import java.util.function.Consumer;
 
 public class GameOver implements GameStep {
     @Override
+    public String name() {
+        return this.getClass().getSimpleName();
+    }
+
+    @Override
     public GameStep interactWithPlayer(Consumer<String> println, Iterator<String> playerAnswers) {
         return this;
     }

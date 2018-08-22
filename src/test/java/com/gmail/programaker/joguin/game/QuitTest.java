@@ -23,21 +23,14 @@ public class QuitTest {
     private final String wantToSaveGame = "\nSave the game? (Y/N):";
     private final String errorInvalidOption = "Invalid option";
 
-    private Quit quit;
-
     @Autowired
-    private QuitMessages messages;
-
-    @Before
-    public void setup() {
-        quit = new Quit(messages);
-    }
+    private Quit quit;
 
     @Test
     public void interactionsWithPlayer() {
         List<String> fakeConsole = new ArrayList<>();
 
-        quit.interactWithPlayer(
+        quit.start().interactWithPlayer(
             fakeConsole::add,
             Collections.singletonList("N").iterator()
         );
@@ -47,7 +40,7 @@ public class QuitTest {
 
     @Test
     public void givenValidOption() {
-        GameStep nextStep = quit.interactWithPlayer(
+        GameStep nextStep = quit.start().interactWithPlayer(
             blackHoleConsole,
             Collections.singletonList("N").iterator()
         );
@@ -59,7 +52,7 @@ public class QuitTest {
     public void givenInvalidOption() {
         List<String> fakeConsole = new ArrayList<>();
 
-        quit.interactWithPlayer(
+        quit.start().interactWithPlayer(
             fakeConsole::add,
             Arrays.asList("A", "9", "Y").iterator()
         );
