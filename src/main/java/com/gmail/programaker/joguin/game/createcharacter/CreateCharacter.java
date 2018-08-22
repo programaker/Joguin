@@ -1,6 +1,10 @@
-package com.gmail.programaker.joguin.game;
+package com.gmail.programaker.joguin.game.createcharacter;
 
-import com.gmail.programaker.joguin.character.Gender;
+import com.gmail.programaker.joguin.earth.MainCharacter;
+import com.gmail.programaker.joguin.game.AskPlayer;
+import com.gmail.programaker.joguin.game.explore.Explore;
+import com.gmail.programaker.joguin.game.GameStep;
+import com.gmail.programaker.joguin.game.quit.Quit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -53,11 +57,11 @@ public class CreateCharacter {
                 this::validateName
             );
 
-            Gender gender = AskPlayer.to(messages.informCharacterGender(),
+            MainCharacter.Gender gender = AskPlayer.to(messages.informCharacterGender(),
                 messages.invalidGender(),
                 println,
                 playerAnswers,
-                Gender::byCode,
+                MainCharacter.Gender::byCode,
                 this::validateGender
             );
 
@@ -69,7 +73,7 @@ public class CreateCharacter {
                 this::validateAge
             );
 
-            return exploreStep.start();
+            return exploreStep.start(new MainCharacter(name, gender, age));
         }
 
         private boolean validateChoice(String choice) {
@@ -84,8 +88,8 @@ public class CreateCharacter {
             return !name.trim().isEmpty();
         }
 
-        private boolean validateGender(Gender gender) {
-            return !gender.equals(Gender.NONE);
+        private boolean validateGender(MainCharacter.Gender gender) {
+            return !gender.equals(MainCharacter.Gender.NONE);
         }
 
         private boolean validateAge(Integer age) {

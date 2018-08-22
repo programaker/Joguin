@@ -1,5 +1,6 @@
 package com.gmail.programaker.joguin.game;
 
+import com.gmail.programaker.joguin.game.showintro.ShowIntro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

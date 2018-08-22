@@ -1,4 +1,4 @@
-package com.gmail.programaker.joguin.game;
+package com.gmail.programaker.joguin.game.createcharacter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

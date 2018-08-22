@@ -1,7 +1,7 @@
 package com.gmail.programaker.joguin.game;
 
 import com.gmail.programaker.joguin.TestConfig;
-import org.junit.Before;
+import com.gmail.programaker.joguin.game.quit.Quit;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

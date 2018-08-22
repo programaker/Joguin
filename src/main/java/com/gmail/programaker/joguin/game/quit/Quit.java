@@ -1,5 +1,8 @@
-package com.gmail.programaker.joguin.game;
+package com.gmail.programaker.joguin.game.quit;
 
+import com.gmail.programaker.joguin.game.AskPlayer;
+import com.gmail.programaker.joguin.game.GameOver;
+import com.gmail.programaker.joguin.game.GameStep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
