@@ -36,11 +36,11 @@ public class ShowIntroTest {
     private ShowIntro showIntro;
 
     @Autowired
-    private Messages messages;
+    private AllMessages allMessages;
 
     @Before
     public void setup() {
-        showIntro = new ShowIntro(messages);
+        showIntro = new ShowIntro(allMessages);
     }
 
     @Test

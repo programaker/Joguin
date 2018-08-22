@@ -29,11 +29,11 @@ public class CreateCharacterTest {
     private CreateCharacter createCharacter;
 
     @Autowired
-    private Messages messages;
+    private AllMessages allMessages;
 
     @Before
     public void setup() {
-        createCharacter = new CreateCharacter(messages);
+        createCharacter = new CreateCharacter(allMessages);
     }
 
     @Test

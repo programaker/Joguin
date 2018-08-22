@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Messages {
+public class AllMessages {
     private final ShowIntroMessages showIntroMessages;
     private final CreateCharacterMessages createCharacterMessages;
     private final QuitMessages quitMessages;
 
     @Autowired
-    public Messages(
+    public AllMessages(
         ShowIntroMessages showIntroMessages,
         CreateCharacterMessages createCharacterMessages,
         QuitMessages quitMessages

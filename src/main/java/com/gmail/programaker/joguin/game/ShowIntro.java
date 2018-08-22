@@ -4,9 +4,9 @@ import java.util.Iterator;
 import java.util.function.Consumer;
 
 public class ShowIntro implements GameStep {
-    private final Messages allMessages;
+    private final AllMessages allMessages;
 
-    public ShowIntro(Messages allMessages) {
+    public ShowIntro(AllMessages allMessages) {
         this.allMessages = allMessages;
     }
 

@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Game {
-    private final Messages allMessages;
+    private final AllMessages allMessages;
 
     @Autowired
-    public Game(Messages allMessages) {
+    public Game(AllMessages allMessages) {
         this.allMessages = allMessages;
     }
 

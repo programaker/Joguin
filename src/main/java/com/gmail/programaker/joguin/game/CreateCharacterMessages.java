@@ -58,15 +58,15 @@ public class CreateCharacterMessages {
         return askToCreateOrQuit;
     }
 
-    public String informName() {
+    public String informCharacterName() {
         return askName;
     }
 
-    public String informGender() {
+    public String informCharacterGender() {
         return askGender;
     }
 
-    public String informAge() {
+    public String informCharacterAge() {
         return askAge;
     }
 

@@ -7,10 +7,10 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class CreateCharacter implements GameStep {
-    private final Messages allMessages;
+    private final AllMessages allMessages;
 
-    public CreateCharacter(Messages messages) {
-        this.allMessages = messages;
+    public CreateCharacter(AllMessages allMessages) {
+        this.allMessages = allMessages;
     }
 
     @Override
@@ -29,7 +29,7 @@ public class CreateCharacter implements GameStep {
             return new Quit(allMessages.getQuitMessages());
         }
 
-        String name = AskPlayer.to(messages.informName(),
+        String name = AskPlayer.to(messages.informCharacterName(),
             messages.invalidName(),
             println,
             playerAnswers,
@@ -37,7 +37,7 @@ public class CreateCharacter implements GameStep {
             this::validateName
         );
 
-        Gender gender = AskPlayer.to(messages.informGender(),
+        Gender gender = AskPlayer.to(messages.informCharacterGender(),
             messages.invalidGender(),
             println,
             playerAnswers,
@@ -45,7 +45,7 @@ public class CreateCharacter implements GameStep {
             this::validateGender
         );
 
-        Integer age = AskPlayer.to(messages.informAge(),
+        Integer age = AskPlayer.to(messages.informCharacterAge(),
             messages.invalidAge(),
             println,
             playerAnswers,
@@ -53,7 +53,7 @@ public class CreateCharacter implements GameStep {
             this::validateAge
         );
 
-        return new Explore();
+        return new Explore(allMessages);
     }
 
     private boolean validateChoice(String choice) {
