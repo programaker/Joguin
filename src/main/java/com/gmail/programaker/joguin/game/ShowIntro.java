@@ -1,12 +1,10 @@
-package com.gmail.programaker.joguin.game.showintro;
+package com.gmail.programaker.joguin.game;
 
-import com.gmail.programaker.joguin.game.AskPlayer;
-import com.gmail.programaker.joguin.game.Continue;
-import com.gmail.programaker.joguin.game.GameOver;
-import com.gmail.programaker.joguin.game.GameStep;
-import com.gmail.programaker.joguin.game.createcharacter.CreateCharacter;
-import com.gmail.programaker.joguin.game.quit.Quit;
+import com.gmail.programaker.joguin.util.AskPlayer;
+import com.gmail.programaker.joguin.util.Messages;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 import java.util.Iterator;
@@ -14,14 +12,16 @@ import java.util.function.Consumer;
 
 @Component
 public class ShowIntro {
-    private final ShowIntroMessages messages;
+    private final MessageSource messages;
     private final CreateCharacter createCharacterStep;
     private final Continue continueStep;
     private final Quit quitStep;
 
     @Autowired
     public ShowIntro(
-        ShowIntroMessages messages,
+        @Qualifier("ShowIntroMessages")
+        MessageSource messages,
+
         CreateCharacter createCharacterStep,
         Continue continueStep,
         Quit quitStep
@@ -44,10 +44,10 @@ public class ShowIntro {
 
         @Override
         public GameStep interactWithPlayer(Consumer<String> println, Iterator<String> playerAnswers) {
-            println.accept(messages.intro());
+            println.accept(Messages.get("intro", messages));
 
-            String option = AskPlayer.to(messages.start(),
-                messages.invalidOption(),
+            String option = AskPlayer.to(Messages.get("start", messages),
+                Messages.get("error-invalid-option", messages),
                 println,
                 playerAnswers,
                 String::toLowerCase,

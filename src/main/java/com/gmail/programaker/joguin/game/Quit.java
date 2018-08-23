@@ -1,9 +1,10 @@
-package com.gmail.programaker.joguin.game.quit;
+package com.gmail.programaker.joguin.game;
 
-import com.gmail.programaker.joguin.game.AskPlayer;
-import com.gmail.programaker.joguin.game.GameOver;
-import com.gmail.programaker.joguin.game.GameStep;
+import com.gmail.programaker.joguin.util.AskPlayer;
+import com.gmail.programaker.joguin.util.Messages;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 import java.util.Iterator;
@@ -11,10 +12,13 @@ import java.util.function.Consumer;
 
 @Component
 public class Quit {
-    private final QuitMessages messages;
+    private final MessageSource messages;
 
     @Autowired
-    public Quit(QuitMessages messages) {
+    public Quit(
+        @Qualifier("QuitMessages")
+        MessageSource messages
+    ) {
         this.messages = messages;
     }
 
@@ -30,8 +34,8 @@ public class Quit {
 
         @Override
         public GameStep interactWithPlayer(Consumer<String> println, Iterator<String> playerAnswers) {
-            String saveGame = AskPlayer.to(messages.informIfWantToSaveGame(),
-                messages.invalidOption(),
+            String saveGame = AskPlayer.to(Messages.get("want-to-save-game", messages),
+                Messages.get("error-invalid-option", messages),
                 println,
                 playerAnswers,
                 String::toLowerCase,

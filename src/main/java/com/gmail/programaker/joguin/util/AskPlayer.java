@@ -1,4 +1,4 @@
-package com.gmail.programaker.joguin.game;
+package com.gmail.programaker.joguin.util;
 
 import java.util.Iterator;
 import java.util.function.Consumer;

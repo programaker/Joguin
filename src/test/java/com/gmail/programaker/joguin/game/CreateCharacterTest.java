@@ -1,7 +1,7 @@
 package com.gmail.programaker.joguin.game;
 
-import com.gmail.programaker.joguin.TestConfig;
-import com.gmail.programaker.joguin.game.createcharacter.CreateCharacter;
+import com.gmail.programaker.joguin.config.MessageConfig;
+import com.gmail.programaker.joguin.config.TestConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,18 +10,18 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.*;
 
-import static com.gmail.programaker.joguin.TestConfig.blackHoleConsole;
+import static com.gmail.programaker.joguin.config.TestConfig.blackHoleConsole;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = TestConfig.class)
+@ContextConfiguration(classes = {TestConfig.class, MessageConfig.class})
 public class CreateCharacterTest {
     private final String askToCreateOrQuit = "\n(C)reate character. (Q)uit";
     private final String askName = "\nName:";
     private final String askGender = "\nGender - (F)emale, (M)ale, (O)ther:";
     private final String askAge = "\nAge:";
-    private final String errorInvalidChoice = "Invalid choice";
+    private final String errorInvalidChoice = "Invalid option";
     private final String errorInvalidName = "Invalid name";
     private final String errorInvalidGender = "Invalid gender";
     private final String errorInvalidAge = "Invalid age. You must be at least 18 to fight for Earth";

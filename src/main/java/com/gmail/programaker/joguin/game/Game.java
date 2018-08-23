@@ -1,8 +1,9 @@
 package com.gmail.programaker.joguin.game;
 
-import com.gmail.programaker.joguin.game.showintro.ShowIntro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Locale;
 
 @Component
 public class Game {
@@ -14,6 +15,7 @@ public class Game {
     }
 
     public GameStep start() {
+        Locale.setDefault(Locale.US);
         return showIntroStep.start();
     }
 }

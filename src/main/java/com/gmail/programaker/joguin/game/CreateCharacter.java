@@ -1,15 +1,14 @@
-package com.gmail.programaker.joguin.game.createcharacter;
+package com.gmail.programaker.joguin.game;
 
+import com.gmail.programaker.joguin.util.AskPlayer;
+import com.gmail.programaker.joguin.util.Messages;
 import com.gmail.programaker.joguin.earth.LocationRepository;
 import com.gmail.programaker.joguin.earth.MainCharacter;
-import com.gmail.programaker.joguin.game.AskPlayer;
-import com.gmail.programaker.joguin.game.explore.Explore;
-import com.gmail.programaker.joguin.game.GameStep;
-import com.gmail.programaker.joguin.game.progress.GameProgress;
-import com.gmail.programaker.joguin.game.quit.Quit;
 import com.gmail.programaker.joguin.zorblax.InvaderArmy;
 import com.gmail.programaker.joguin.zorblax.Invasion;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 import java.util.Iterator;
@@ -17,18 +16,19 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Component
 public class CreateCharacter {
-    private final CreateCharacterMessages messages;
+    private final MessageSource messages;
     private final LocationRepository locationRepository;
     private final Explore exploreStep;
     private final Quit quitStep;
 
     @Autowired
     public CreateCharacter(
-        CreateCharacterMessages messages,
+        @Qualifier("CreateCharacterMessages")
+        MessageSource messages,
+
         LocationRepository locationRepository,
         Explore exploreStep,
         Quit quitStep
@@ -51,8 +51,8 @@ public class CreateCharacter {
 
         @Override
         public GameStep interactWithPlayer(Consumer<String> println, Iterator<String> playerAnswers) {
-            String choice = AskPlayer.to(messages.createOrQuit(),
-                messages.invalidChoice(),
+            String choice = AskPlayer.to(Messages.get("create-or-quit", messages),
+                Messages.get("error-invalid-option", messages),
                 println,
                 playerAnswers,
                 String::toLowerCase,
@@ -63,24 +63,24 @@ public class CreateCharacter {
                 return quitStep.start();
             }
 
-            String name = AskPlayer.to(messages.informCharacterName(),
-                messages.invalidName(),
+            String name = AskPlayer.to(Messages.get("inform-character-name", messages),
+                Messages.get("error-invalid-name", messages),
                 println,
                 playerAnswers,
                 Function.identity(),
                 this::validateName
             );
 
-            MainCharacter.Gender gender = AskPlayer.to(messages.informCharacterGender(),
-                messages.invalidGender(),
+            MainCharacter.Gender gender = AskPlayer.to(Messages.get("inform-character-gender", messages),
+                Messages.get("error-invalid-gender", messages),
                 println,
                 playerAnswers,
                 MainCharacter.Gender::byCode,
                 this::validateGender
             );
 
-            Integer age = AskPlayer.to(messages.informCharacterAge(),
-                messages.invalidAge(),
+            Integer age = AskPlayer.to(Messages.get("inform-character-age", messages),
+                Messages.get("error-invalid-age", messages),
                 println,
                 playerAnswers,
                 Integer::parseInt,
