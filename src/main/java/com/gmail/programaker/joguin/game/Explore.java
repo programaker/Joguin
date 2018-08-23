@@ -54,7 +54,7 @@ public class Explore {
                 printInvasion(invasions.get(i), i, println);
             }
 
-            int option = AskPlayer.to(Messages.get("where-do-you-want-to-go", messages),
+            int option = AskPlayer.to(Messages.get("where-do-you-want-to-go", messages, 1, invasions.size()),
                 Messages.get("error-invalid-location", messages),
                 println,
                 playerAnswers,
