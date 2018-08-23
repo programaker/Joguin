@@ -1,7 +1,6 @@
-package com.gmail.programaker.joguin.game.progress;
+package com.gmail.programaker.joguin.zorblax;
 
 import com.gmail.programaker.joguin.earth.Location;
-import com.gmail.programaker.joguin.zorblax.TerraformDevice;
 
 public class Invasion {
     private final TerraformDevice terraformDevice;

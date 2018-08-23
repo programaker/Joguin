@@ -1,7 +1,7 @@
 package com.gmail.programaker.joguin.game.explore;
 
-import com.gmail.programaker.joguin.earth.MainCharacter;
 import com.gmail.programaker.joguin.game.GameStep;
+import com.gmail.programaker.joguin.game.progress.GameProgress;
 import com.gmail.programaker.joguin.game.quit.Quit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,15 +18,15 @@ public class Explore {
         this.quitStep = quitStep;
     }
 
-    public GameStep start(MainCharacter character) {
-        return this.new Step(character);
+    public GameStep start(GameProgress gameProgress) {
+        return this.new Step(gameProgress);
     }
 
     private class Step implements GameStep {
-        private final MainCharacter character;
+        private final GameProgress gameProgress;
 
-        public Step(MainCharacter character) {
-            this.character = character;
+        private Step(GameProgress gameProgress) {
+            this.gameProgress = gameProgress;
         }
 
         @Override
