@@ -2,6 +2,7 @@ package com.gmail.programaker.joguin.game;
 
 import com.gmail.programaker.joguin.config.MessageConfig;
 import com.gmail.programaker.joguin.config.TestConfig;
+import com.gmail.programaker.joguin.util.BaseTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,7 @@ import static com.gmail.programaker.joguin.config.TestConfig.blackHoleConsole;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {TestConfig.class, MessageConfig.class})
-public class QuitTest {
+public class QuitTest extends BaseTest {
     private final String wantToSaveGame = "\nSave the game? (Y/N):";
     private final String errorInvalidOption = "Invalid option";
 

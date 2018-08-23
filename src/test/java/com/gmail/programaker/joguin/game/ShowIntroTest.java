@@ -1,12 +1,8 @@
 package com.gmail.programaker.joguin.game;
 
-import com.gmail.programaker.joguin.config.MessageConfig;
-import com.gmail.programaker.joguin.config.TestConfig;
+import com.gmail.programaker.joguin.util.BaseTest;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,9 +12,7 @@ import java.util.List;
 import static com.gmail.programaker.joguin.config.TestConfig.blackHoleConsole;
 import static org.junit.Assert.assertEquals;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {TestConfig.class, MessageConfig.class})
-public class ShowIntroTest {
+public class ShowIntroTest extends BaseTest {
     private final String intro =
         "\nThe Zorblaxians arrived on Earth planning to conquer it to expand their galactic empire.\n" +
         "\n" +
