@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 @Component
 public class Explore {
@@ -54,15 +55,19 @@ public class Explore {
                 printInvasion(invasions.get(i), i, println);
             }
 
-            int option = AskPlayer.to(Messages.get("where-do-you-want-to-go", messages, 1, invasions.size()),
+            String option = AskPlayer.to(Messages.get("where-do-you-want-to-go", messages, 1, invasions.size()),
                 Messages.get("error-invalid-location", messages),
                 println,
                 playerAnswers,
-                Integer::parseInt,
-                i -> i > 0 && i <= invasions.size()
+                String::toLowerCase,
+                validateOptionFn(invasions.size())
             );
 
-            Invasion selectedInvasion = invasions.get(option);
+            if (option.equals("q")) {
+                return quitStep.start();
+            }
+
+            Invasion selectedInvasion = invasions.get(Integer.parseInt(option) - 1);
             return quitStep.start();
         }
 
@@ -74,6 +79,10 @@ public class Explore {
                 : "alien-dominated-location";
 
             println.accept(Messages.get(key, messages, i+1, location.getCity(), location.getCountry()));
+        }
+
+        private Predicate<String> validateOptionFn(int invasionCount) {
+            return option -> !option.trim().equals("") && option.matches("[1-"+ invasionCount +"Qq]");
         }
     }
 }
