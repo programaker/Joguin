@@ -13,14 +13,19 @@ import static com.gmail.programaker.joguin.config.TestConfig.blackHoleConsole;
 import static org.junit.Assert.assertEquals;
 
 public class CreateCharacterTest extends BaseTest {
-    private final String askToCreateOrQuit = "\n(C)reate character. (Q)uit";
+    private final String askToCreateCharacter = "\nCreate your main character";
+
     private final String askName = "\nName:";
     private final String askGender = "\nGender - (F)emale, (M)ale, (O)ther:";
     private final String askAge = "\nAge:";
-    private final String errorInvalidChoice = "Invalid option";
+
+    private final String characterCreated = "\nWelcome, commander Michael Poole! Now, you must bring our forces\n" +
+        "to the invaded cities and take them back from the Zorblaxians.\n" +
+        "Destroy the Terraform Devices and save all life on Earth!";
+
     private final String errorInvalidName = "Invalid name";
     private final String errorInvalidGender = "Invalid gender";
-    private final String errorInvalidAge = "Invalid age. You must be at least 18 to fight for Earth";
+    private final String errorInvalidAge = "Invalid age. You must be at least 18 to defend Earth";
 
     @Autowired
     private CreateCharacter createCharacter;
@@ -31,21 +36,22 @@ public class CreateCharacterTest extends BaseTest {
 
         createCharacter.start().interactWithPlayer(
             fakeConsole::add,
-            Arrays.asList("C", "Michael Poole", "M", "35").iterator()
+            Arrays.asList("Michael Poole", "M", "35").iterator()
         );
 
         int i = 0;
-        assertEquals("Should have asked Player to create character or quit", askToCreateOrQuit, fakeConsole.get(i++));
+        assertEquals("Should have asked Player to create character", askToCreateCharacter, fakeConsole.get(i++));
         assertEquals("Should have asked for Character's name", askName, fakeConsole.get(i++));
         assertEquals("Should have asked for Character's gender", askGender, fakeConsole.get(i++));
         assertEquals("Should have asked for Character's age", askAge, fakeConsole.get(i++));
+        assertEquals("Should have send welcome message", characterCreated, fakeConsole.get(i++));
     }
 
     @Test
     public void givenValidCharacterData() {
         GameStep nextStep = createCharacter.start().interactWithPlayer(
             blackHoleConsole,
-            Arrays.asList("C", "Kitana", "F", "28").iterator()
+            Arrays.asList("Carol Danvers", "F", "28").iterator()
         );
 
         assertEquals("Should have accepted the new character data and gone to Explore step", "Explore", nextStep.name());
@@ -58,30 +64,24 @@ public class CreateCharacterTest extends BaseTest {
         createCharacter.start().interactWithPlayer(
             fakeConsole::add,
             Arrays.asList(
-                //Choice attempts
-                "A",
-                "C",
-
                 //Name attempts
                 " ",
-                "Lady Jay",
+                "Michael Poole",
 
                 //Gender attempts
                 "7",
-                "F",
+                "M",
 
                 //Age attempts
                 "15",
-                "25"
+                "35"
             ).iterator()
         );
 
         //It should ask the information to the Player until a valid answer is given
         int i = 0;
 
-        assertEquals(askToCreateOrQuit, fakeConsole.get(i++));
-        assertEquals(errorInvalidChoice, fakeConsole.get(i++));
-        assertEquals(askToCreateOrQuit, fakeConsole.get(i++));
+        assertEquals(askToCreateCharacter, fakeConsole.get(i++));
 
         assertEquals(askName, fakeConsole.get(i++));
         assertEquals(errorInvalidName, fakeConsole.get(i++));
@@ -94,15 +94,7 @@ public class CreateCharacterTest extends BaseTest {
         assertEquals(askAge, fakeConsole.get(i++));
         assertEquals(errorInvalidAge, fakeConsole.get(i++));
         assertEquals(askAge, fakeConsole.get(i++));
-    }
 
-    @Test
-    public void whenThePlayerAsksToQuit() {
-        GameStep nextStep = createCharacter.start().interactWithPlayer(
-            blackHoleConsole,
-            Collections.singletonList("Q").iterator()
-        );
-
-        assertEquals("Should have gone to Quit step", "Quit", nextStep.name());
+        assertEquals(characterCreated, fakeConsole.get(i++));
     }
 }

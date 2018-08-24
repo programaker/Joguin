@@ -22,7 +22,6 @@ public class CreateCharacter {
     private final MessageSource messages;
     private final LocationRepository locationRepository;
     private final Explore exploreStep;
-    private final Quit quitStep;
 
     @Autowired
     public CreateCharacter(
@@ -30,13 +29,11 @@ public class CreateCharacter {
         MessageSource messages,
 
         LocationRepository locationRepository,
-        Explore exploreStep,
-        Quit quitStep
+        Explore exploreStep
     ) {
         this.messages = messages;
         this.locationRepository = locationRepository;
         this.exploreStep = exploreStep;
-        this.quitStep = quitStep;
     }
 
     public GameStep start() {
@@ -51,17 +48,7 @@ public class CreateCharacter {
 
         @Override
         public GameStep interactWithPlayer(Consumer<String> println, Iterator<String> playerAnswers) {
-            String choice = AskPlayer.to(Messages.get("create-or-quit", messages),
-                Messages.get("error-invalid-option", messages),
-                println,
-                playerAnswers,
-                String::toLowerCase,
-                this::validateChoice
-            );
-
-            if (choice.equals("q")) {
-                return quitStep.start();
-            }
+            println.accept(Messages.get("create-character", messages));
 
             String name = AskPlayer.to(Messages.get("inform-character-name", messages),
                 Messages.get("error-invalid-name", messages),
@@ -87,15 +74,10 @@ public class CreateCharacter {
                 this::validateAge
             );
 
-            return exploreStep.start(initGameProgress(new MainCharacter(name, gender, age)));
-        }
+            MainCharacter character = new MainCharacter(name, gender, age);
+            println.accept(Messages.get("character-created", messages, character.getName()));
 
-        private boolean validateChoice(String choice) {
-            if (choice.isEmpty()) {
-                return false;
-            }
-
-            return choice.equals("c") || choice.equals("q");
+            return exploreStep.start(initGameProgress(character));
         }
 
         private boolean validateName(String name) {
