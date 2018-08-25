@@ -49,17 +49,17 @@ public class Explore {
         }
 
         @Override
-        public GameStep interactWithPlayer(Consumer<String> println, Iterator<String> playerAnswers) {
-            println.accept("");
+        public GameStep interactWithPlayer(Consumer<String> print, Iterator<String> playerAnswers) {
+            print.accept("\n");
             List<Invasion> invasions = gameProgress.getInvasions();
 
             for (int i = 0; i < invasions.size(); i++) {
-                printInvasion(invasions.get(i), i, println);
+                printInvasion(invasions.get(i), i, print);
             }
 
             String option = AskPlayer.to(Messages.get("where-do-you-want-to-go", messages, 1, invasions.size()),
                 Messages.get("error-invalid-option", messages),
-                println,
+                print,
                 playerAnswers,
                 String::toLowerCase,
                 validateOptionFn(invasions.size())

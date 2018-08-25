@@ -20,11 +20,11 @@ public class JoguinApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        try (Scanner scanner = new Scanner(System.in).useDelimiter("\n")) {
-            GameStep step = game.start();
+        try (Scanner scanner = new Scanner(System.in, "UTF-8").useDelimiter("\n")) {
+            GameStep nextStep = game.start();
 
-            while (!step.gameOver()) {
-                step = step.interactWithPlayer(System.out::println, scanner);
+            while (!nextStep.gameOver()) {
+                nextStep = nextStep.interactWithPlayer(System.out::print, scanner);
             }
         }
     }

@@ -16,15 +16,15 @@ public class ShowIntroTest extends BaseTest {
     private final String intro =
         "\nThe Zorblaxians arrived on Earth planning to conquer it to expand their galactic empire.\n" +
         "\n" +
-        "To do so, they installed several Terraform Devices around the planet, to make our environment \n" +
+        "To do so, they installed several Terraform Devices around the planet, to make our environment\n" +
         "suitable for their biology, extinguishing all earthlings in the process.\n" +
         "\n" +
-        "Your job is to lead humanity's army in a mission to destroy all Terraform Devices. \n" +
-        "We managed to discover their locations and they will be sent to you, but beware! The Devices \n" +
-        "have strong defenses!";
+        "Your job is to lead humanity's army in a mission to destroy all Terraform Devices.\n" +
+        "We managed to discover their locations and they will be sent to you, but beware! The Devices\n" +
+        "have strong defenses!\n";
 
-    private final String start = "\n(N)ew Game, (C)ontinue, (Q)uit:";
-    private final String errorInvalidOption = "Invalid option";
+    private final String start = "\n(N)ew Game, (C)ontinue, (Q)uit:\n";
+    private final String errorInvalidOption = "Invalid option\n";
 
     @Autowired
     private ShowIntro showIntro;

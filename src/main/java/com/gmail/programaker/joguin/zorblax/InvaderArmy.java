@@ -6,7 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public final class InvaderArmy {
     private static final int minPower = 1000;
-    private static final int maxPower = 9000;
+    private static final int maxPower = 20000;
 
     public static Invasion invade(Location location) {
         return new Invasion(new TerraformDevice(fillPower()), location);

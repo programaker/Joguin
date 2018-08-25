@@ -3,6 +3,7 @@ package com.gmail.programaker.joguin.game;
 import com.gmail.programaker.joguin.earth.MainCharacter;
 import com.gmail.programaker.joguin.zorblax.Invasion;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -10,11 +11,16 @@ public class GameProgress {
     private final MainCharacter character;
     private final List<Invasion> invasions;
     private int characterExperience;
+    private int defeatedInvasions;
 
     public GameProgress(MainCharacter character, List<Invasion> invasions) {
         this.character = character;
-        this.invasions = Collections.unmodifiableList(invasions);
+
+        //The invasions can only be modified through GameProgress
+        this.invasions = new ArrayList<>(invasions);
+
         this.characterExperience = 0;
+        this.defeatedInvasions = 0;
     }
 
     public MainCharacter getCharacter() {
@@ -22,11 +28,12 @@ public class GameProgress {
     }
 
     public List<Invasion> getInvasions() {
-        return invasions;
+        //The invasions can only be modified through GameProgress
+        return Collections.unmodifiableList(invasions);
     }
 
     public Invasion getInvasion(int selectedInvasion) {
-        return invasions.get(selectedInvasion - 1);
+        return invasions.get(index(selectedInvasion));
     }
 
     public int getCharacterExperience() {
@@ -36,5 +43,24 @@ public class GameProgress {
     public GameProgress increaseCharacterExperience(int experiencePoints) {
         this.characterExperience += experiencePoints;
         return this;
+    }
+
+    public GameProgress defeatInvasion(int selectedInvasion) {
+        Invasion invasion = getInvasion(selectedInvasion);
+
+        if (invasion.isAlienDominatedLocation()) {
+            invasions.set(index(selectedInvasion), invasion.defeat());
+            defeatedInvasions++;
+        }
+
+        return this;
+    }
+
+    public boolean allInvasionsDefeated() {
+        return defeatedInvasions == invasions.size();
+    }
+
+    private int index(int selectedInvasion) {
+        return selectedInvasion - 1;
     }
 }

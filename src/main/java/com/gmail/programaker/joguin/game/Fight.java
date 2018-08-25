@@ -46,29 +46,33 @@ public class Fight {
         }
 
         @Override
-        public GameStep interactWithPlayer(Consumer<String> println, Iterator<String> playerAnswers) {
+        public GameStep interactWithPlayer(Consumer<String> print, Iterator<String> playerAnswers) {
             Invasion invasion = gameProgress.getInvasion(selectedInvasion);
-            TerraformDevice device = invasion.getTerraformDevice();
-            MainCharacter character = gameProgress.getCharacter();
+            String city = invasion.getLocation().getCity();
 
-            println.accept(Messages.get("report", messages,
-                character.getName(),
-                invasion.getLocation().getCity(),
-                device.getDefensePower()
-            ));
+            if (invasion.isAlienDominatedLocation()) {
+                TerraformDevice device = invasion.getTerraformDevice();
+                MainCharacter character = gameProgress.getCharacter();
 
-            String order = AskPlayer.to(Messages.get("give-order", messages),
-                Messages.get("invalid-option", messages),
-                println,
-                playerAnswers,
-                String::toLowerCase,
-                this::validateOrder
-            );
+                print.accept(Messages.get("report", messages,
+                    character.getName(),
+                    city,
+                    device.getDefensePower()
+                ));
 
-            if (order.equals("f")) {
-                FightOutcome fightOutcome = fight(gameProgress.getCharacterExperience(), device.getDefensePower());
-                //-- insert post-fight message here --//
-                updateGameProgress(fightOutcome);
+                String order = AskPlayer.to(Messages.get("give-order", messages),
+                    Messages.get("error-invalid-option", messages),
+                    print,
+                    playerAnswers,
+                    String::toLowerCase,
+                    this::validateOrder
+                );
+
+                if (order.equals("f")) {
+                    fight(device, city, print);
+                }
+            } else {
+                print.accept(Messages.get("location-already-saved", messages, city));
             }
 
             return explore.start(gameProgress);
@@ -78,33 +82,62 @@ public class Fight {
             return order.equals("f") || order.equals("r");
         }
 
-        private FightOutcome fight(int characterExperience, int devicePower) {
-            boolean deviceDestroyed = characterExperience >= devicePower;
-            //-- show fight animation --//
-            return new FightOutcome(devicePower/2, deviceDestroyed);
+        private void fight(TerraformDevice device, String city, Consumer<String> print) {
+            int characterExperience = gameProgress.getCharacterExperience();
+            int deviceDefensePower = device.getDefensePower();
+            boolean deviceDestroyed = characterExperience >= deviceDefensePower;
+
+            showFightAnimation(print);
+
+            gameProgress.increaseCharacterExperience(deviceDefensePower/2);
+            if (deviceDestroyed) {
+                gameProgress.defeatInvasion(selectedInvasion);
+            }
+
+            int newExperience = gameProgress.getCharacterExperience();
+            String fightOutcome = deviceDestroyed
+                ? Messages.get("earth-won", messages, newExperience)
+                : Messages.get("aliens-won", messages, city, newExperience);
+
+            print.accept(fightOutcome);
         }
 
-        private void updateGameProgress(FightOutcome fightOutcome) {
-            gameProgress.getInvasion(selectedInvasion).setAlienDominatedLocation(fightOutcome.isDeviceDestroyed());
-            gameProgress.increaseCharacterExperience(fightOutcome.getGainedExperience());
-        }
-    }
+        private void showFightAnimation(Consumer<String> print) {
+            String earth = Messages.get("animation-earth", messages);
+            String earthWeapon = Messages.get("animation-earth-weapon", messages);
+            String alien = Messages.get("animation-alien", messages);
+            String alienWeapon = Messages.get("animation-alien-weapon", messages);
+            String strike = Messages.get("animation-strike", messages);
 
-    private class FightOutcome {
-        private final int gainedExperience;
-        private final boolean deviceDestroyed;
-
-        private FightOutcome(int gainedExperience, boolean deviceDestroyed) {
-            this.gainedExperience = gainedExperience;
-            this.deviceDestroyed = deviceDestroyed;
+            showAttack(earth, earthWeapon, strike, print);
+            sleep(100L);
+            showAttack(alien, alienWeapon, strike, print);
         }
 
-        private int getGainedExperience() {
-            return gainedExperience;
+        private void showAttack(String attacker, String weapon, String strike, Consumer<String> print) {
+            print.accept("\n");
+            print.accept(attacker);
+
+            for (int i = 1; i <= 31; i++) {
+                if (i%2 == 0) {
+                    print.accept(weapon);
+                } else {
+                    print.accept(" ");
+                }
+
+                sleep(50L);
+            }
+
+            print.accept(strike);
+            print.accept("\n");
         }
 
-        private boolean isDeviceDestroyed() {
-            return deviceDestroyed;
+        private void sleep(long millis) {
+            try {
+                Thread.sleep(millis);
+            } catch (InterruptedException e) {
+                // ¯\_(ツ)_/¯
+            }
         }
     }
 }

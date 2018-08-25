@@ -14,8 +14,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class QuitTest extends BaseTest {
-    private final String wantToSaveGame = "\nSave the game? - (Y)es, (N)o:";
-    private final String errorInvalidOption = "Invalid option";
+    private final String wantToSaveGame = "\nSave the game? - (Y)es, (N)o:\n";
+    private final String errorInvalidOption = "Invalid option\n";
 
     @Autowired
     private Quit quit;

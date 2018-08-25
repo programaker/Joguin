@@ -32,10 +32,10 @@ public class Quit {
         }
 
         @Override
-        public GameStep interactWithPlayer(Consumer<String> println, Iterator<String> playerAnswers) {
+        public GameStep interactWithPlayer(Consumer<String> print, Iterator<String> playerAnswers) {
             String saveGame = AskPlayer.to(Messages.get("want-to-save-game", messages),
                 Messages.get("error-invalid-option", messages),
-                println,
+                print,
                 playerAnswers,
                 String::toLowerCase,
                 this::validateSaveGame

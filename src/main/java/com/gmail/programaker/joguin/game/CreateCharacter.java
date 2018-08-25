@@ -45,12 +45,12 @@ public class CreateCharacter {
         }
 
         @Override
-        public GameStep interactWithPlayer(Consumer<String> println, Iterator<String> playerAnswers) {
-            println.accept(Messages.get("create-character", messages));
+        public GameStep interactWithPlayer(Consumer<String> print, Iterator<String> playerAnswers) {
+            print.accept(Messages.get("create-character", messages));
 
             String name = AskPlayer.to(Messages.get("inform-character-name", messages),
                 Messages.get("error-invalid-name", messages),
-                println,
+                print,
                 playerAnswers,
                 Function.identity(),
                 this::validateName
@@ -58,7 +58,7 @@ public class CreateCharacter {
 
             MainCharacter.Gender gender = AskPlayer.to(Messages.get("inform-character-gender", messages),
                 Messages.get("error-invalid-gender", messages),
-                println,
+                print,
                 playerAnswers,
                 MainCharacter.Gender::byCode,
                 this::validateGender
@@ -66,14 +66,14 @@ public class CreateCharacter {
 
             Integer age = AskPlayer.to(Messages.get("inform-character-age", messages),
                 Messages.get("error-invalid-age", messages),
-                println,
+                print,
                 playerAnswers,
                 Integer::parseInt,
                 this::validateAge
             );
 
             MainCharacter character = new MainCharacter(name, gender, age);
-            println.accept(Messages.get("character-created", messages, character.getName()));
+            print.accept(Messages.get("character-created", messages, character.getName()));
 
             return exploreStep.start(initGameProgress(character));
         }

@@ -5,12 +5,10 @@ import com.gmail.programaker.joguin.earth.Location;
 public class Invasion {
     private final TerraformDevice terraformDevice;
     private final Location location;
-    private boolean alienDominatedLocation;
+    private final boolean alienDominatedLocation;
 
     public Invasion(TerraformDevice terraformDevice, Location location) {
-        this.terraformDevice = terraformDevice;
-        this.location = location;
-        this.alienDominatedLocation = true;
+        this(terraformDevice, location, true);
     }
 
     public TerraformDevice getTerraformDevice() {
@@ -25,8 +23,13 @@ public class Invasion {
         return alienDominatedLocation;
     }
 
-    public Invasion setAlienDominatedLocation(boolean alienDominatedLocation) {
+    public Invasion defeat() {
+        return new Invasion(terraformDevice, location, false);
+    }
+
+    private Invasion(TerraformDevice terraformDevice, Location location, boolean alienDominatedLocation) {
+        this.terraformDevice = terraformDevice;
+        this.location = location;
         this.alienDominatedLocation = alienDominatedLocation;
-        return this;
     }
 }

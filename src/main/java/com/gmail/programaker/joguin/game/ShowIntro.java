@@ -41,12 +41,12 @@ public class ShowIntro {
         }
 
         @Override
-        public GameStep interactWithPlayer(Consumer<String> println, Iterator<String> playerAnswers) {
-            println.accept(Messages.get("intro", messages));
+        public GameStep interactWithPlayer(Consumer<String> print, Iterator<String> playerAnswers) {
+            print.accept(Messages.get("intro", messages));
 
             String option = AskPlayer.to(Messages.get("start", messages),
                 Messages.get("error-invalid-option", messages),
-                println,
+                print,
                 playerAnswers,
                 String::toLowerCase,
                 this::validateOption

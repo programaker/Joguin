@@ -12,19 +12,19 @@ import static com.gmail.programaker.joguin.config.TestConfig.blackHoleConsole;
 import static org.junit.Assert.assertEquals;
 
 public class CreateCharacterTest extends BaseTest {
-    private final String askToCreateCharacter = "\nCreate your main character";
+    private final String askToCreateCharacter = "\nCreate your main character\n";
 
-    private final String askName = "\nName:";
-    private final String askGender = "\nGender - (F)emale, (M)ale, (O)ther:";
-    private final String askAge = "\nAge:";
+    private final String askName = "\nName:\n";
+    private final String askGender = "\nGender - (F)emale, (M)ale, (O)ther:\n";
+    private final String askAge = "\nAge:\n";
 
     private final String characterCreated = "\nWelcome, commander Michael Poole! Now, you must bring our forces\n" +
         "to the invaded cities and take them back from the Zorblaxians.\n" +
-        "Destroy the Terraform Devices and save all life on Earth!";
+        "Destroy the Terraform Devices and save all life on Earth!\n";
 
-    private final String errorInvalidName = "Invalid name";
-    private final String errorInvalidGender = "Invalid gender";
-    private final String errorInvalidAge = "Invalid age. You must be at least 18 to defend Earth";
+    private final String errorInvalidName = "Invalid name\n";
+    private final String errorInvalidGender = "Invalid gender\n";
+    private final String errorInvalidAge = "Invalid age. You must be at least 18 to defend Earth\n";
 
     @Autowired
     private CreateCharacter createCharacter;

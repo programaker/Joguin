@@ -10,7 +10,7 @@ public class GameOver implements GameStep {
     }
 
     @Override
-    public GameStep interactWithPlayer(Consumer<String> println, Iterator<String> playerAnswers) {
+    public GameStep interactWithPlayer(Consumer<String> print, Iterator<String> playerAnswers) {
         return this;
     }
 

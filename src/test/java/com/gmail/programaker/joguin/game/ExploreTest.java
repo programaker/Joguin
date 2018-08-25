@@ -17,12 +17,12 @@ import static com.gmail.programaker.joguin.config.TestConfig.blackHoleConsole;
 import static org.junit.Assert.*;
 
 public class ExploreTest extends BaseTest {
-    private final String london = "1. \uD83D\uDC7D London - UK";
-    private final String tokyo = "2. \uD83D\uDC7D Tokyo - Japan";
-    private final String saoPaulo = "3. \uD83D\uDC7D São Paulo - Brazil";
-    private final String savedSaoPaulo = "3. \uD83C\uDF0D São Paulo - Brazil";
-    private final String whereToGo = "\nWhere do you want to go? - from 1 to 3, (Q)uit:";
-    private final String invalidOption = "Invalid option";
+    private final String london = "1. \uD83D\uDC7D London - UK\n";
+    private final String tokyo = "2. \uD83D\uDC7D Tokyo - Japan\n";
+    private final String saoPaulo = "3. \uD83D\uDC7D São Paulo - Brazil\n";
+    private final String savedSaoPaulo = "3. \uD83C\uDF0D São Paulo - Brazil\n";
+    private final String whereToGo = "\nWhere do you want to go? - (1) to (3), (Q)uit:\n";
+    private final String invalidOption = "Invalid option\n";
 
     @Autowired
     private Explore explore;
@@ -37,7 +37,7 @@ public class ExploreTest extends BaseTest {
         );
 
         int i = 0;
-        assertEquals("", fakeConsole.get(i++));
+        assertEquals("\n", fakeConsole.get(i++));
         assertEquals(london, fakeConsole.get(i++));
         assertEquals(tokyo, fakeConsole.get(i++));
         assertEquals(saoPaulo, fakeConsole.get(i++));
@@ -54,7 +54,7 @@ public class ExploreTest extends BaseTest {
         );
 
         int i = 0;
-        assertEquals("", fakeConsole.get(i++));
+        assertEquals("\n", fakeConsole.get(i++));
         assertEquals(london, fakeConsole.get(i++));
         assertEquals(tokyo, fakeConsole.get(i++));
         assertEquals(savedSaoPaulo, fakeConsole.get(i++));
@@ -82,7 +82,7 @@ public class ExploreTest extends BaseTest {
 
         int i = 0;
 
-        assertEquals("", fakeConsole.get(i++));
+        assertEquals("\n", fakeConsole.get(i++));
         assertEquals(london, fakeConsole.get(i++));
         assertEquals(tokyo, fakeConsole.get(i++));
         assertEquals(saoPaulo, fakeConsole.get(i++));
@@ -114,7 +114,6 @@ public class ExploreTest extends BaseTest {
     }
 
     private GameProgress saveSaoPaulo(GameProgress gameProgress) {
-        gameProgress.getInvasions().get(2).setAlienDominatedLocation(false);
-        return gameProgress;
+        return gameProgress.defeatInvasion(3);
     }
 }
