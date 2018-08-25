@@ -110,6 +110,31 @@ public class FightTest extends BaseTest {
         assertEquals("Should have going back to Explore", "Explore", nextStep.name());
     }
 
+    @Test
+    public void givenInvalidOption() {
+        List<String> fakeConsole = new ArrayList<>();
+        GameProgress progress = beginProgress();
+
+        GameStep nextStep = fight.start(1, progress).interactWithPlayer(
+            fakeConsole::add,
+            Arrays.asList("1", "meh", "", "r").iterator()
+        );
+
+        int i = 0;
+        assertEquals("Should have printed the report", report, fakeConsole.get(i++));
+
+        assertEquals(giveOrder, fakeConsole.get(i++));
+        assertEquals(errorInvalidOption, fakeConsole.get(i++));
+
+        assertEquals(giveOrder, fakeConsole.get(i++));
+        assertEquals(errorInvalidOption, fakeConsole.get(i++));
+
+        assertEquals(giveOrder, fakeConsole.get(i++));
+        assertEquals(errorInvalidOption, fakeConsole.get(i++));
+
+        assertEquals(giveOrder, fakeConsole.get(i++));
+    }
+
     private GameStep interactionsWithPlayerUntilAfterFight(GameProgress progress, List<String> fakeConsole) {
         GameStep nextStep = fight.start(1, progress).interactWithPlayer(
             fakeConsole::add,
