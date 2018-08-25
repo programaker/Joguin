@@ -16,14 +16,17 @@ import java.util.function.Consumer;
 @Component
 public class Fight {
     private final MessageSource messages;
+    private final Consumer<Long> sleep;
     private final Explore explore;
 
     @Autowired
     public Fight(
         @Qualifier("FightMessages") MessageSource messages,
+        Consumer<Long> sleep,
         Explore explore
     ) {
         this.messages = messages;
+        this.sleep = sleep;
         this.explore = explore;
     }
 
@@ -108,10 +111,13 @@ public class Fight {
             String alien = Messages.get("animation-alien", messages);
             String alienWeapon = Messages.get("animation-alien-weapon", messages);
             String strike = Messages.get("animation-strike", messages);
+            long time = 100L;
 
             showAttack(earth, earthWeapon, strike, print);
-            sleep(100L);
+            sleep.accept(time);
+
             showAttack(alien, alienWeapon, strike, print);
+            sleep.accept(time);
         }
 
         private void showAttack(String attacker, String weapon, String strike, Consumer<String> print) {
@@ -125,19 +131,11 @@ public class Fight {
                     print.accept(" ");
                 }
 
-                sleep(50L);
+                sleep.accept(50L);
             }
 
             print.accept(strike);
             print.accept("\n");
-        }
-
-        private void sleep(long millis) {
-            try {
-                Thread.sleep(millis);
-            } catch (InterruptedException e) {
-                // ¯\_(ツ)_/¯
-            }
         }
     }
 }
