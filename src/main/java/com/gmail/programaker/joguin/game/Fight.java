@@ -81,7 +81,7 @@ public class Fight {
         private FightOutcome fight(int characterExperience, int devicePower) {
             boolean deviceDestroyed = characterExperience >= devicePower;
             //-- show fight animation --//
-            return new FightOutcome(devicePower, deviceDestroyed);
+            return new FightOutcome(devicePower/2, deviceDestroyed);
         }
 
         private void updateGameProgress(FightOutcome fightOutcome) {
