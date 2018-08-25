@@ -16,30 +16,27 @@ import java.util.function.Consumer;
 @Component
 public class Fight {
     private final MessageSource messages;
-    private final Explore explore;
 
     @Autowired
     public Fight(
-        @Qualifier("FightMessages")
-        MessageSource messages,
-
-        Explore explore
+        @Qualifier("FightMessages") MessageSource messages
     ) {
         this.messages = messages;
-        this.explore = explore;
     }
 
-    public GameStep start(int selectedInvasion, GameProgress gameProgress) {
-        return this.new Step(selectedInvasion, gameProgress);
+    public GameStep start(int selectedInvasion, GameProgress gameProgress, Explore explore) {
+        return this.new Step(selectedInvasion, gameProgress, explore);
     }
 
     private class Step implements GameStep {
         private final int selectedInvasion;
         private final GameProgress gameProgress;
+        private final Explore explore;
 
-        private Step(int selectedInvasion, GameProgress gameProgress) {
+        private Step(int selectedInvasion, GameProgress gameProgress, Explore explore) {
             this.selectedInvasion = selectedInvasion;
             this.gameProgress = gameProgress;
+            this.explore = explore;
         }
 
         @Override
@@ -56,7 +53,7 @@ public class Fight {
             println.accept(Messages.get("report", messages,
                 character.getName(),
                 invasion.getLocation().getCity(),
-                device.getPowerLevel()
+                device.getDefensePower()
             ));
 
             String order = AskPlayer.to(Messages.get("give-order", messages),
@@ -68,7 +65,7 @@ public class Fight {
             );
 
             if (order.equals("f")) {
-                FightOutcome fightOutcome = fight(gameProgress.getCharacterExperience(), device.getPowerLevel());
+                FightOutcome fightOutcome = fight(gameProgress.getCharacterExperience(), device.getDefensePower());
                 //-- insert post-fight message here --//
                 updateGameProgress(fightOutcome);
             }
@@ -87,7 +84,7 @@ public class Fight {
         }
 
         private void updateGameProgress(FightOutcome fightOutcome) {
-            gameProgress.getInvasion(selectedInvasion).setAliensDefeated(fightOutcome.isDeviceDestroyed());
+            gameProgress.getInvasion(selectedInvasion).setAlienDominatedLocation(fightOutcome.isDeviceDestroyed());
             gameProgress.increaseCharacterExperience(fightOutcome.getGainedExperience());
         }
     }

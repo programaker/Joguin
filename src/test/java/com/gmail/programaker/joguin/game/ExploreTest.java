@@ -21,7 +21,7 @@ public class ExploreTest extends BaseTest {
     private final String tokyo = "2. \uD83D\uDC7D Tokyo - Japan";
     private final String saoPaulo = "3. \uD83D\uDC7D São Paulo - Brazil";
     private final String savedSaoPaulo = "3. \uD83C\uDF0D São Paulo - Brazil";
-    private final String whereToGo = "\nWhere do you want to go? - from 1 to 3 or (Q)uit";
+    private final String whereToGo = "\nWhere do you want to go? - from 1 to 3, (Q)uit:";
     private final String invalidOption = "Invalid option";
 
     @Autowired
@@ -114,7 +114,7 @@ public class ExploreTest extends BaseTest {
     }
 
     private GameProgress saveSaoPaulo(GameProgress gameProgress) {
-        gameProgress.getInvasions().get(2).setAliensDefeated(true);
+        gameProgress.getInvasions().get(2).setAlienDominatedLocation(false);
         return gameProgress;
     }
 }

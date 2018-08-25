@@ -25,9 +25,7 @@ public class CreateCharacter {
 
     @Autowired
     public CreateCharacter(
-        @Qualifier("CreateCharacterMessages")
-        MessageSource messages,
-
+        @Qualifier("CreateCharacterMessages") MessageSource messages,
         LocationRepository locationRepository,
         Explore exploreStep
     ) {

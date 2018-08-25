@@ -22,9 +22,7 @@ public class Explore {
 
     @Autowired
     public Explore(
-        @Qualifier("ExploreMessages")
-        MessageSource messages,
-
+        @Qualifier("ExploreMessages") MessageSource messages,
         Fight fightStep,
         Quit quitStep
     ) {
@@ -71,15 +69,15 @@ public class Explore {
             }
 
             int selectedInvasion = Integer.parseInt(option);
-            return fightStep.start(selectedInvasion, gameProgress);
+            return fightStep.start(selectedInvasion, gameProgress, Explore.this);
         }
 
         private void printInvasion(Invasion invasion, int i, Consumer<String> println) {
             Location location = invasion.getLocation();
 
-            String key = invasion.isAliensDefeated()
-                ? "human-dominated-location"
-                : "alien-dominated-location";
+            String key = invasion.isAlienDominatedLocation()
+                ? "alien-dominated-location"
+                : "human-dominated-location";
 
             println.accept(Messages.get(key, messages, i+1, location.getCity(), location.getCountry()));
         }

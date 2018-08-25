@@ -1,13 +1,8 @@
 package com.gmail.programaker.joguin.game;
 
-import com.gmail.programaker.joguin.config.MessageConfig;
-import com.gmail.programaker.joguin.config.TestConfig;
 import com.gmail.programaker.joguin.util.BaseTest;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class QuitTest extends BaseTest {
-    private final String wantToSaveGame = "\nSave the game? (Y/N):";
+    private final String wantToSaveGame = "\nSave the game? - (Y)es, (N)o:";
     private final String errorInvalidOption = "Invalid option";
 
     @Autowired

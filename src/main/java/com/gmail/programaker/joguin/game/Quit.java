@@ -16,8 +16,7 @@ public class Quit {
 
     @Autowired
     public Quit(
-        @Qualifier("QuitMessages")
-        MessageSource messages
+        @Qualifier("QuitMessages") MessageSource messages
     ) {
         this.messages = messages;
     }

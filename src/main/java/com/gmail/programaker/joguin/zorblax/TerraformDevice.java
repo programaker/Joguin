@@ -1,13 +1,13 @@
 package com.gmail.programaker.joguin.zorblax;
 
 public class TerraformDevice {
-    private final int powerLevel;
+    private final int defensePower;
 
-    public TerraformDevice(int powerLevel) {
-        this.powerLevel = powerLevel;
+    public TerraformDevice(int defensePower) {
+        this.defensePower = defensePower;
     }
 
-    public int getPowerLevel() {
-        return powerLevel;
+    public int getDefensePower() {
+        return defensePower;
     }
 }

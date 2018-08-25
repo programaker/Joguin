@@ -19,9 +19,7 @@ public class ShowIntro {
 
     @Autowired
     public ShowIntro(
-        @Qualifier("ShowIntroMessages")
-        MessageSource messages,
-
+        @Qualifier("ShowIntroMessages") MessageSource messages,
         CreateCharacter createCharacterStep,
         Continue continueStep,
         Quit quitStep
