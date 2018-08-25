@@ -25,8 +25,8 @@ public class Invasion {
         return aliensDefeated;
     }
 
-    public Invasion setAliensDefeated() {
-        this.aliensDefeated = true;
+    public Invasion setAliensDefeated(boolean aliensDefeated) {
+        this.aliensDefeated = aliensDefeated;
         return this;
     }
 }

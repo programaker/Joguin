@@ -56,7 +56,7 @@ public class Explore {
             }
 
             String option = AskPlayer.to(Messages.get("where-do-you-want-to-go", messages, 1, invasions.size()),
-                Messages.get("error-invalid-location", messages),
+                Messages.get("error-invalid-option", messages),
                 println,
                 playerAnswers,
                 String::toLowerCase,
@@ -82,7 +82,7 @@ public class Explore {
         }
 
         private Predicate<String> validateOptionFn(int invasionCount) {
-            return option -> !option.trim().equals("") && option.matches("[1-"+ invasionCount +"Qq]");
+            return option -> !option.trim().equals("") && option.matches("[1-"+ invasionCount +"q]");
         }
     }
 }
