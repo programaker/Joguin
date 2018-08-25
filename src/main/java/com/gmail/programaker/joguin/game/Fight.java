@@ -16,27 +16,28 @@ import java.util.function.Consumer;
 @Component
 public class Fight {
     private final MessageSource messages;
+    private final Explore explore;
 
     @Autowired
     public Fight(
-        @Qualifier("FightMessages") MessageSource messages
+        @Qualifier("FightMessages") MessageSource messages,
+        Explore explore
     ) {
         this.messages = messages;
+        this.explore = explore;
     }
 
-    public GameStep start(int selectedInvasion, GameProgress gameProgress, Explore explore) {
-        return this.new Step(selectedInvasion, gameProgress, explore);
+    public GameStep start(int selectedInvasion, GameProgress gameProgress) {
+        return this.new Step(selectedInvasion, gameProgress);
     }
 
     private class Step implements GameStep {
         private final int selectedInvasion;
         private final GameProgress gameProgress;
-        private final Explore explore;
 
-        private Step(int selectedInvasion, GameProgress gameProgress, Explore explore) {
+        private Step(int selectedInvasion, GameProgress gameProgress) {
             this.selectedInvasion = selectedInvasion;
             this.gameProgress = gameProgress;
-            this.explore = explore;
         }
 
         @Override

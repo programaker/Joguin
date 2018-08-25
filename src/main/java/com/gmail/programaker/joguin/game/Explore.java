@@ -7,6 +7,7 @@ import com.gmail.programaker.joguin.zorblax.Invasion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.Iterator;
@@ -23,7 +24,7 @@ public class Explore {
     @Autowired
     public Explore(
         @Qualifier("ExploreMessages") MessageSource messages,
-        Fight fightStep,
+        @Lazy Fight fightStep, //To solve circular dependency without changing design
         Quit quitStep
     ) {
         this.messages = messages;
@@ -69,7 +70,7 @@ public class Explore {
             }
 
             int selectedInvasion = Integer.parseInt(option);
-            return fightStep.start(selectedInvasion, gameProgress, Explore.this);
+            return fightStep.start(selectedInvasion, gameProgress);
         }
 
         private void printInvasion(Invasion invasion, int i, Consumer<String> println) {
