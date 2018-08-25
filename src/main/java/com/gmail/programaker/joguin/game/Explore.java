@@ -24,7 +24,7 @@ public class Explore {
     @Autowired
     public Explore(
         @Qualifier("ExploreMessages") MessageSource messages,
-        @Lazy Fight fightStep, //To solve circular dependency without changing design
+        @Lazy Fight fightStep, //To solve circular dependency
         Quit quitStep
     ) {
         this.messages = messages;
