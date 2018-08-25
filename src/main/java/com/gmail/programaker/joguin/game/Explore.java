@@ -17,6 +17,7 @@ import java.util.function.Predicate;
 @Component
 public class Explore {
     private final MessageSource messages;
+    private final Fight fightStep;
     private final Quit quitStep;
 
     @Autowired
@@ -24,9 +25,11 @@ public class Explore {
         @Qualifier("ExploreMessages")
         MessageSource messages,
 
+        Fight fightStep,
         Quit quitStep
     ) {
         this.messages = messages;
+        this.fightStep = fightStep;
         this.quitStep = quitStep;
     }
 
@@ -67,8 +70,8 @@ public class Explore {
                 return quitStep.start();
             }
 
-            Invasion selectedInvasion = invasions.get(Integer.parseInt(option) - 1);
-            return quitStep.start();
+            int selectedInvasion = Integer.parseInt(option);
+            return fightStep.start(selectedInvasion, gameProgress);
         }
 
         private void printInvasion(Invasion invasion, int i, Consumer<String> println) {

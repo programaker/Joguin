@@ -32,6 +32,12 @@ public class MessageConfig {
         return messageSource("ShowIntroMessages");
     }
 
+    @Bean
+    @Qualifier("FightMessages")
+    public MessageSource fightMessages() {
+        return messageSource("FightMessages");
+    }
+
     private MessageSource messageSource(String basename) {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasename(basename);
