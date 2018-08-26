@@ -9,16 +9,15 @@ import org.springframework.stereotype.Component;
 
 import java.util.Iterator;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 @Component
 public class ShowIntro {
     private final MessageSource messages;
     private final GameProgressRepository repository;
-    private final CreateCharacter createCharacterStep;
+    private final CreateCharacter createCharacter;
     private final Explore explore;
-    private final Quit quitStep;
+    private final Quit quit;
 
     @Autowired
     public ShowIntro(
@@ -30,9 +29,9 @@ public class ShowIntro {
     ) {
         this.messages = messages;
         this.repository = repository;
-        this.createCharacterStep = createCharacter;
+        this.createCharacter = createCharacter;
         this.explore = explore;
-        this.quitStep = quit;
+        this.quit = quit;
     }
 
     public GameStep start() {
@@ -61,17 +60,17 @@ public class ShowIntro {
             );
 
             if (option.equals("n")) {
-                return createCharacterStep.start();
+                return createCharacter.start();
             }
 
             if (option.equals("r")) {
                 return repository.restore()
                     .map(progress -> welcomeBack(progress, print))
-                    .orElseGet(createCharacterStep::start);
+                    .orElseGet(createCharacter::start);
             }
 
             if (option.equals("q")) {
-                return quitStep.start();
+                return quit.start();
             }
 
             return null; //Very very unlikely to happen

@@ -1,16 +1,17 @@
 package com.gmail.programaker.joguin.game;
 
 import com.gmail.programaker.joguin.util.BaseTest;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static com.gmail.programaker.joguin.config.TestConfig.blackHoleConsole;
+import static com.gmail.programaker.joguin.config.TestConfig.*;
 import static org.junit.Assert.assertEquals;
 
 public class ShowIntroTest extends BaseTest {
@@ -29,13 +30,26 @@ public class ShowIntroTest extends BaseTest {
     private final String errorInvalidOption = "Invalid option\n";
 
     @Autowired
+    @Qualifier("ShowIntroMessages")
+    private MessageSource messages;
+
+    @Autowired
+    private CreateCharacter createCharacter;
+
+    @Autowired
+    private Explore explore;
+
+    @Autowired
+    private Quit quit;
+
+    @Autowired
     private ShowIntro showIntro;
 
     @Test
-    public void interactionsWithPlayer() {
+    public void interactionsWithPlayerWithoutGameToResume() {
         List<String> fakeConsole = new ArrayList<>();
 
-        showIntro.start().interactWithPlayer(
+        showIntro(emptyGameProgressRepository).start().interactWithPlayer(
             fakeConsole::add,
             Collections.singletonList("Q").iterator()
         );
@@ -46,8 +60,22 @@ public class ShowIntroTest extends BaseTest {
     }
 
     @Test
+    public void interactionsWithPlayerWithGameToResume() {
+        List<String> fakeConsole = new ArrayList<>();
+
+        showIntro(fullGameProgressRepository).start().interactWithPlayer(
+            fakeConsole::add,
+            Collections.singletonList("Q").iterator()
+        );
+
+        int i = 0;
+        assertEquals("Should have displayed the game intro", intro, fakeConsole.get(i++));
+        assertEquals("Should asked a start option", startWithResume, fakeConsole.get(i++));
+    }
+
+    @Test
     public void whenThePlayerAsksToStartNewGame() {
-        GameStep nextStep = showIntro.start().interactWithPlayer(
+        GameStep nextStep = showIntro(emptyGameProgressRepository).start().interactWithPlayer(
             blackHoleConsole,
             Collections.singletonList("N").iterator()
         );
@@ -57,7 +85,7 @@ public class ShowIntroTest extends BaseTest {
 
     @Test
     public void whenThePlayerAsksToQuit() {
-        GameStep nextStep = showIntro.start().interactWithPlayer(
+        GameStep nextStep = showIntro(emptyGameProgressRepository).start().interactWithPlayer(
             blackHoleConsole,
             Collections.singletonList("Q").iterator()
         );
@@ -65,9 +93,9 @@ public class ShowIntroTest extends BaseTest {
         assertEquals("Should have gone to Quit step", "Quit", nextStep.name());
     }
 
-    @Test @Ignore
+    @Test
     public void whenThePlayerAsksToResumeGame() {
-        GameStep nextStep = showIntro.start().interactWithPlayer(
+        GameStep nextStep = showIntro(fullGameProgressRepository).start().interactWithPlayer(
             blackHoleConsole,
             Collections.singletonList("R").iterator()
         );
@@ -79,7 +107,7 @@ public class ShowIntroTest extends BaseTest {
     public void givenInvalidOption() {
         List<String> fakeConsole = new ArrayList<>();
 
-        showIntro.start().interactWithPlayer(
+        showIntro(emptyGameProgressRepository).start().interactWithPlayer(
             fakeConsole::add,
             Arrays.asList(" ", "meh", "N").iterator()
         );
@@ -94,5 +122,9 @@ public class ShowIntroTest extends BaseTest {
         assertEquals(errorInvalidOption, fakeConsole.get(i++));
 
         assertEquals(start, fakeConsole.get(i++));
+    }
+
+    private ShowIntro showIntro(GameProgressRepository repository) {
+        return new ShowIntro(messages, repository, createCharacter, explore, quit);
     }
 }

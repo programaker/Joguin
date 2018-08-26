@@ -1,10 +1,6 @@
 package com.gmail.programaker.joguin.game;
 
-import com.gmail.programaker.joguin.earth.Location;
-import com.gmail.programaker.joguin.earth.MainCharacter;
 import com.gmail.programaker.joguin.util.BaseTest;
-import com.gmail.programaker.joguin.zorblax.InvaderArmy;
-import com.gmail.programaker.joguin.zorblax.Invasion;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,8 +9,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static com.gmail.programaker.joguin.config.TestConfig.beginProgress;
 import static com.gmail.programaker.joguin.config.TestConfig.blackHoleConsole;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ExploreTest extends BaseTest {
     private final String london = "1. \uD83D\uDC7D London - UK\n";
@@ -44,7 +41,7 @@ public class ExploreTest extends BaseTest {
 
         explore.start(beginProgress()).interactWithPlayer(
             fakeConsole::add,
-            Collections.singletonList("3").iterator()
+            Collections.singletonList("1").iterator()
         );
 
         int i = 0;
@@ -117,7 +114,7 @@ public class ExploreTest extends BaseTest {
         List<String> fakeConsole = new ArrayList<>();
 
         GameProgress progress = beginProgress();
-        for (int n = 1; n <= 3; n++) {
+        for (int n = 1; n <= progress.getInvasions().size(); n++) {
             progress.defeatInvasion(n);
         }
 
@@ -134,18 +131,6 @@ public class ExploreTest extends BaseTest {
         assertEquals("Should have printed mission accomplished message", missionAccomplished, fakeConsole.get(i++));
 
         assertEquals("Should have gone to GameOver step", "GameOver", nextStep.name());
-    }
-
-    private GameProgress beginProgress() {
-        MainCharacter character = new MainCharacter("Uhura", MainCharacter.Gender.FEMALE, 36);
-
-        List<Invasion> invasions = Arrays.asList(
-            InvaderArmy.invade(new Location("London", "UK")),
-            InvaderArmy.invade(new Location("Tokyo", "Japan")),
-            InvaderArmy.invade(new Location("São Paulo", "Brazil"))
-        );
-
-        return new GameProgress(character, invasions);
     }
 
     private GameProgress saveSaoPaulo(GameProgress gameProgress) {
