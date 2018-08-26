@@ -1,23 +1,18 @@
 package com.gmail.programaker.joguin.game;
 
 import com.gmail.programaker.joguin.util.Messages;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Component;
 
 import java.util.Iterator;
+import java.util.Properties;
 import java.util.function.Consumer;
 
-@Component
 public class SaveGame {
-    private final MessageSource messages;
+    private final Properties messages;
     private final GameProgressRepository repository;
     private final GameOver gameOver;
 
-    @Autowired
     public SaveGame(
-        @Qualifier("SaveGameMessages") MessageSource messages,
+        Properties messages,
         GameProgressRepository repository,
         GameOver gameOver
     ) {

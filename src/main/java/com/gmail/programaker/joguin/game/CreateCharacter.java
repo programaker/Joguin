@@ -1,31 +1,26 @@
 package com.gmail.programaker.joguin.game;
 
-import com.gmail.programaker.joguin.util.AskPlayer;
-import com.gmail.programaker.joguin.util.Messages;
 import com.gmail.programaker.joguin.earth.LocationRepository;
 import com.gmail.programaker.joguin.earth.MainCharacter;
+import com.gmail.programaker.joguin.util.AskPlayer;
+import com.gmail.programaker.joguin.util.Messages;
 import com.gmail.programaker.joguin.zorblax.InvaderArmy;
 import com.gmail.programaker.joguin.zorblax.Invasion;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Component;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@Component
 public class CreateCharacter {
-    private final MessageSource messages;
+    private final Properties messages;
     private final LocationRepository locationRepository;
     private final Explore exploreStep;
 
-    @Autowired
     public CreateCharacter(
-        @Qualifier("CreateCharacterMessages") MessageSource messages,
+        Properties messages,
         LocationRepository locationRepository,
         Explore exploreStep
     ) {

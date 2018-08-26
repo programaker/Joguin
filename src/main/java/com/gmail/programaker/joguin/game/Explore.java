@@ -4,30 +4,24 @@ import com.gmail.programaker.joguin.earth.Location;
 import com.gmail.programaker.joguin.util.AskPlayer;
 import com.gmail.programaker.joguin.util.Messages;
 import com.gmail.programaker.joguin.zorblax.Invasion;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-@Component
 public class Explore {
-    private final MessageSource messages;
+    private final Properties messages;
     private final Consumer<Long> sleep;
     private final Fight fight;
     private final GameOver gameOver;
     private final Quit quit;
 
-    @Autowired
     public Explore(
-        @Qualifier("ExploreMessages") MessageSource messages,
+        Properties messages,
         Consumer<Long> sleep,
-        @Lazy Fight fight, //To solve circular dependency
+        Fight fight,
         GameOver gameOver,
         Quit quit
     ) {

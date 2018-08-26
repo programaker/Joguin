@@ -2,7 +2,6 @@ package com.gmail.programaker.joguin.game;
 
 import com.gmail.programaker.joguin.util.BaseTest;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,7 +25,6 @@ public class CreateCharacterTest extends BaseTest {
     private final String errorInvalidGender = "Invalid gender\n";
     private final String errorInvalidAge = "Invalid age. You must be at least 18 to defend Earth\n";
 
-    @Autowired
     private CreateCharacter createCharacter;
 
     @Test

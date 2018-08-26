@@ -1,12 +1,11 @@
 package com.gmail.programaker.joguin.util;
 
-import org.springframework.context.MessageSource;
-
-import java.util.Locale;
+import java.text.MessageFormat;
+import java.util.Properties;
 
 public final class Messages {
-    public static String get(String key, MessageSource source, Object... args) {
-        return source.getMessage(key, args, Locale.getDefault());
+    public static String get(String key, Properties source, Object... args) {
+        return MessageFormat.format(source.getProperty(key), args);
     }
 
     private Messages(){}

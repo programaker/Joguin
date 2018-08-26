@@ -1,53 +1,48 @@
 package com.gmail.programaker.joguin.config;
 
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ResourceBundleMessageSource;
+import java.util.Locale;
+import java.util.Properties;
 
-@Configuration
 public class MessageConfig {
-    @Bean
-    @Qualifier("CreateCharacterMessages")
-    public MessageSource createCharacterMessages() {
+    private final Locale locale = Locale.US;
+
+    public Properties createCharacterMessages() {
         return messageSource("CreateCharacterMessages");
     }
 
-    @Bean
-    @Qualifier("ExploreMessages")
-    public MessageSource exploreMessages() {
+    public Properties exploreMessages() {
         return messageSource("ExploreMessages");
     }
 
-    @Bean
-    @Qualifier("QuitMessages")
-    public MessageSource quitMessages() {
+    public Properties quitMessages() {
         return messageSource("QuitMessages");
     }
 
-    @Bean
-    @Qualifier("ShowIntroMessages")
-    public MessageSource showIntroMessages() {
+    public Properties showIntroMessages() {
         return messageSource("ShowIntroMessages");
     }
 
-    @Bean
-    @Qualifier("FightMessages")
-    public MessageSource fightMessages() {
+    public Properties fightMessages() {
         return messageSource("FightMessages");
     }
 
-    @Bean
-    @Qualifier("SaveGameMessages")
-    public MessageSource saveGameMessages() {
+    public Properties saveGameMessages() {
         return messageSource("SaveGameMessages");
     }
 
-    private MessageSource messageSource(String basename) {
-        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename(basename);
-        messageSource.setDefaultEncoding("UTF-8");
-        return messageSource;
+    private Properties messageSource(String basename) {
+        try {
+            Properties source = new Properties();
+            String filename = basename + "_" + locale + ".properties";
+
+            source.load(getClass()
+                .getClassLoader()
+                .getResourceAsStream(filename)
+            );
+
+            return source;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

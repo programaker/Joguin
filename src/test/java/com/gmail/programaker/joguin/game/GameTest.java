@@ -2,12 +2,10 @@ package com.gmail.programaker.joguin.game;
 
 import com.gmail.programaker.joguin.util.BaseTest;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class GameTest extends BaseTest {
-    @Autowired
     private Game game;
 
     @Test

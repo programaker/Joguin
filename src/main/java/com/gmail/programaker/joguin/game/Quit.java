@@ -2,23 +2,18 @@ package com.gmail.programaker.joguin.game;
 
 import com.gmail.programaker.joguin.util.AskPlayer;
 import com.gmail.programaker.joguin.util.Messages;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Component;
 
 import java.util.Iterator;
+import java.util.Properties;
 import java.util.function.Consumer;
 
-@Component
 public class Quit {
-    private final MessageSource messages;
+    private final Properties messages;
     private final SaveGame saveGame;
     private final GameOver gameOver;
 
-    @Autowired
     public Quit(
-        @Qualifier("QuitMessages") MessageSource messages,
+        Properties messages,
         SaveGame saveGame,
         GameOver gameOver
     ) {
@@ -38,7 +33,7 @@ public class Quit {
     private class Step implements GameStep {
         private final GameProgress gameProgress;
 
-        public Step(GameProgress gameProgress) {
+        private Step(GameProgress gameProgress) {
             this.gameProgress = gameProgress;
         }
 

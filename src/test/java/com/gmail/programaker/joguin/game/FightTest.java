@@ -3,15 +3,15 @@ package com.gmail.programaker.joguin.game;
 import com.gmail.programaker.joguin.earth.Location;
 import com.gmail.programaker.joguin.earth.MainCharacter;
 import com.gmail.programaker.joguin.util.BaseTest;
-import com.gmail.programaker.joguin.zorblax.InvaderArmy;
 import com.gmail.programaker.joguin.zorblax.Invasion;
 import com.gmail.programaker.joguin.zorblax.TerraformDevice;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.MessageFormat;
-import java.util.*;
-import java.util.function.Consumer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -43,7 +43,6 @@ public class FightTest extends BaseTest {
     private final String locationAlreadySaved = "\nGood to see Rio de Janeiro being rebuilt after the destruction of the Terraform Device!\n" +
         "Life is slowly getting back to normal!\n";
 
-    @Autowired
     private Fight fight;
 
     @Test

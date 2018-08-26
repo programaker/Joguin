@@ -6,18 +6,12 @@ import com.gmail.programaker.joguin.game.GameProgress;
 import com.gmail.programaker.joguin.game.GameProgressRepository;
 import com.gmail.programaker.joguin.zorblax.InvaderArmy;
 import com.gmail.programaker.joguin.zorblax.Invasion;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-@Configuration
-@ComponentScan(basePackages = "com.gmail.programaker.joguin")
 public class TestConfig {
     public static final Consumer<String> blackHoleConsole = message -> {};
 
@@ -96,7 +90,6 @@ public class TestConfig {
         return new GameProgress(character, invasions);
     }
 
-    @Bean
     public Consumer<Long> sleep() {
         //Overriding sleep function to accelerate tests
         return millis -> {};

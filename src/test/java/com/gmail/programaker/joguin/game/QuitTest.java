@@ -2,7 +2,6 @@ package com.gmail.programaker.joguin.game;
 
 import com.gmail.programaker.joguin.util.BaseTest;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,7 +17,6 @@ public class QuitTest extends BaseTest {
     private final String wantToSaveGame = "\nSave the game? - (Y)es, (N)o:\n";
     private final String errorInvalidOption = "Invalid option\n";
 
-    @Autowired
     private Quit quit;
 
     @Test

@@ -1,16 +1,9 @@
 package com.gmail.programaker.joguin.game;
 
-import com.gmail.programaker.joguin.config.TestConfig;
 import com.gmail.programaker.joguin.util.BaseTest;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.MessageSource;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static com.gmail.programaker.joguin.config.TestConfig.*;
 import static org.junit.Assert.assertEquals;
@@ -31,17 +24,12 @@ public class ShowIntroTest extends BaseTest {
     private final String errorInvalidOption = "Invalid option\n";
     private final String welcomeBack = "\nWelcome back, commander Uhura! You have 500 points of experience.\n";
 
-    @Autowired
-    @Qualifier("ShowIntroMessages")
-    private MessageSource messages;
+    private Properties messages;
 
-    @Autowired
     private CreateCharacter createCharacter;
 
-    @Autowired
     private Explore explore;
 
-    @Autowired
     private Quit quit;
 
     @Test

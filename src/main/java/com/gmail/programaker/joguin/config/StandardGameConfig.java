@@ -1,13 +1,14 @@
 package com.gmail.programaker.joguin.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
 import java.util.function.Consumer;
 
-@Configuration
-public class GeneralConfig {
-    @Bean
+public class StandardGameConfig implements GameConfig {
+    @Override
+    public RepositoryConfig repositoryConfig() {
+        return new StandardRepositoryConfig();
+    }
+
+    @Override
     public Consumer<Long> sleep() {
         return millis -> {
             try {

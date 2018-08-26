@@ -3,13 +3,11 @@ package com.gmail.programaker.joguin.game;
 import com.gmail.programaker.joguin.config.TestConfig;
 import com.gmail.programaker.joguin.util.BaseTest;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.MessageSource;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 
 import static com.gmail.programaker.joguin.config.TestConfig.beginProgress;
 import static org.junit.Assert.*;
@@ -18,11 +16,8 @@ public class SaveGameTest extends BaseTest {
     private final String success = "\nGame saved.\n";
     private final String error = "\nError saving the game. Damn Zorblaxians!\n";
 
-    @Autowired
-    @Qualifier("SaveGameMessages")
-    private MessageSource messages;
+    private Properties messages;
 
-    @Autowired
     private GameOver gameOver;
 
     @Test

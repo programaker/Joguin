@@ -5,29 +5,28 @@ import com.gmail.programaker.joguin.util.AskPlayer;
 import com.gmail.programaker.joguin.util.Messages;
 import com.gmail.programaker.joguin.zorblax.Invasion;
 import com.gmail.programaker.joguin.zorblax.TerraformDevice;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Component;
 
 import java.util.Iterator;
+import java.util.Properties;
 import java.util.function.Consumer;
 
-@Component
 public class Fight {
-    private final MessageSource messages;
+    private final Properties messages;
     private final Consumer<Long> sleep;
-    private final Explore explore;
+    private Explore explore;
 
-    @Autowired
     public Fight(
-        @Qualifier("FightMessages") MessageSource messages,
-        Consumer<Long> sleep,
-        Explore explore
+        Properties messages,
+        Consumer<Long> sleep
     ) {
         this.messages = messages;
         this.sleep = sleep;
+    }
+
+    //To solve circular dependency between Explore and Fight
+    public Fight setExplore(Explore explore) {
         this.explore = explore;
+        return this;
     }
 
     public GameStep start(int selectedInvasion, GameProgress gameProgress) {
