@@ -47,7 +47,7 @@ public class QuitTest extends BaseTest {
     public void playerWantsToSaveTheGame() {
         GameStep nextStep = quit.start(beginProgress()).interactWithPlayer(
             blackHoleConsole,
-            Collections.singletonList("N").iterator()
+            Collections.singletonList("Y").iterator()
         );
 
         assertEquals("Should have gone to SaveGame step", "SaveGame", nextStep.name());
