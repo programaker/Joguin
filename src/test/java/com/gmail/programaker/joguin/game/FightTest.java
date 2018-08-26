@@ -1,6 +1,6 @@
 package com.gmail.programaker.joguin.game;
 
-import com.gmail.programaker.joguin.config.TestGameConfig;
+import com.gmail.programaker.joguin.config.TestGameComponents;
 import com.gmail.programaker.joguin.earth.City;
 import com.gmail.programaker.joguin.earth.MainCharacter;
 import com.gmail.programaker.joguin.util.BaseTest;
@@ -47,7 +47,7 @@ public class FightTest extends BaseTest {
     private Fight fight;
 
     public FightTest() {
-        fight = new TestGameConfig().fight();
+        fight = new TestGameComponents().fight();
     }
 
     @Test

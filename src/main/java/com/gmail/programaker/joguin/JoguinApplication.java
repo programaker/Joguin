@@ -1,7 +1,7 @@
 package com.gmail.programaker.joguin;
 
-import com.gmail.programaker.joguin.config.GameConfig;
-import com.gmail.programaker.joguin.config.StandardGameConfig;
+import com.gmail.programaker.joguin.config.GameComponents;
+import com.gmail.programaker.joguin.config.StandardGameComponents;
 import com.gmail.programaker.joguin.game.Game;
 import com.gmail.programaker.joguin.game.GameStep;
 
@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class JoguinApplication {
     public static void main(String[] args) {
-        GameConfig config = new StandardGameConfig();
+        GameComponents config = new StandardGameComponents();
         Game game = config.game();
 
         try (Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8.name()).useDelimiter("\n")) {

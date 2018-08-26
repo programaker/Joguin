@@ -1,6 +1,6 @@
 package com.gmail.programaker.joguin.game;
 
-import com.gmail.programaker.joguin.config.TestGameConfig;
+import com.gmail.programaker.joguin.config.TestGameComponents;
 import com.gmail.programaker.joguin.util.BaseTest;
 import org.junit.Test;
 
@@ -10,7 +10,7 @@ public class GameTest extends BaseTest {
     private Game game;
 
     public GameTest() {
-        game = new TestGameConfig().game();
+        game = new TestGameComponents().game();
     }
 
     @Test

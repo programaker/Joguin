@@ -8,8 +8,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Properties;
-import java.util.function.Consumer;
 
 import static com.gmail.programaker.joguin.util.TestUtil.beginProgress;
 import static org.junit.Assert.*;
@@ -25,14 +23,14 @@ public class SaveGameTest extends BaseTest {
     private SaveGame errorSaveGame;
 
     public SaveGameTest() {
-        GameConfig testGameConfig = new TestGameConfig();
-        GameConfig saveGameErrorGameConfig = new SaveGameErrorGameConfig();
+        GameComponents testGameComponents = new TestGameComponents();
+        GameComponents saveGameErrorGameComponents = new SaveGameErrorGameComponents();
 
-        saveGame = testGameConfig.saveGame();
-        saveGameRepository = testGameConfig.repositoryConfig().gameProgressRepository();
+        saveGame = testGameComponents.saveGame();
+        saveGameRepository = testGameComponents.repositoryConfig().gameProgressRepository();
 
-        errorSaveGame = saveGameErrorGameConfig.saveGame();
-        errorSaveGameRepository = saveGameErrorGameConfig.repositoryConfig().gameProgressRepository();
+        errorSaveGame = saveGameErrorGameComponents.saveGame();
+        errorSaveGameRepository = saveGameErrorGameComponents.repositoryConfig().gameProgressRepository();
     }
 
     @Test
@@ -67,8 +65,8 @@ public class SaveGameTest extends BaseTest {
         assertEquals("Should have gone to GameOver step", "GameOver", nextStep.name());
     }
 
-    private static final class SaveGameErrorGameConfig extends GameConfig {
-        private SaveGameErrorGameConfig() {
+    private static final class SaveGameErrorGameComponents extends GameComponents {
+        private SaveGameErrorGameComponents() {
             super(new TestRepositoryConfig(true), TestUtil.sleep);
         }
     }

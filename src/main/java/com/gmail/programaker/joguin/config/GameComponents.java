@@ -5,7 +5,7 @@ import com.gmail.programaker.joguin.game.*;
 
 import java.util.function.Consumer;
 
-public abstract class GameConfig {
+public abstract class GameComponents {
     private final SaveGame saveGame;
     private final Quit quit;
     private final Fight fight;
@@ -15,7 +15,7 @@ public abstract class GameConfig {
     private final Game game;
     private final RepositoryConfig repositoryConfig;
 
-    public GameConfig(RepositoryConfig repositoryConfig, Consumer<Long> sleep) {
+    public GameComponents(RepositoryConfig repositoryConfig, Consumer<Long> sleep) {
         this.repositoryConfig = repositoryConfig;
 
         MessageConfig messageConfig = new MessageConfig();

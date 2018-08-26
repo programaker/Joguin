@@ -1,6 +1,6 @@
 package com.gmail.programaker.joguin.game;
 
-import com.gmail.programaker.joguin.config.TestGameConfig;
+import com.gmail.programaker.joguin.config.TestGameComponents;
 import com.gmail.programaker.joguin.util.BaseTest;
 import org.junit.Test;
 
@@ -29,7 +29,7 @@ public class CreateCharacterTest extends BaseTest {
     private CreateCharacter createCharacter;
 
     public CreateCharacterTest() {
-        createCharacter = new TestGameConfig().createCharacter();
+        createCharacter = new TestGameComponents().createCharacter();
     }
 
     @Test

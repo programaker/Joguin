@@ -1,6 +1,6 @@
 package com.gmail.programaker.joguin.game;
 
-import com.gmail.programaker.joguin.config.TestGameConfig;
+import com.gmail.programaker.joguin.config.TestGameComponents;
 import com.gmail.programaker.joguin.util.BaseTest;
 import org.junit.Test;
 
@@ -35,7 +35,7 @@ public class ExploreTest extends BaseTest {
     private Explore explore;
 
     public ExploreTest() {
-        explore = new TestGameConfig().explore();
+        explore = new TestGameComponents().explore();
     }
 
     @Test

@@ -1,6 +1,6 @@
 package com.gmail.programaker.joguin.game;
 
-import com.gmail.programaker.joguin.config.TestGameConfig;
+import com.gmail.programaker.joguin.config.TestGameComponents;
 import com.gmail.programaker.joguin.util.BaseTest;
 import org.junit.Test;
 
@@ -21,7 +21,7 @@ public class QuitTest extends BaseTest {
     private Quit quit;
 
     public QuitTest() {
-        quit = new TestGameConfig().quit();
+        quit = new TestGameComponents().quit();
     }
 
     @Test

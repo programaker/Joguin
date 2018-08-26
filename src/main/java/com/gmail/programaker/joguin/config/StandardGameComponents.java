@@ -1,7 +1,7 @@
 package com.gmail.programaker.joguin.config;
 
-public class StandardGameConfig extends GameConfig {
-    public StandardGameConfig() {
+public class StandardGameComponents extends GameComponents {
+    public StandardGameComponents() {
         super(
             new StandardRepositoryConfig(),
 

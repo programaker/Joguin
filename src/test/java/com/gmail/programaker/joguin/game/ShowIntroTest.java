@@ -1,6 +1,6 @@
 package com.gmail.programaker.joguin.game;
 
-import com.gmail.programaker.joguin.config.TestGameConfig;
+import com.gmail.programaker.joguin.config.TestGameComponents;
 import com.gmail.programaker.joguin.util.BaseTest;
 import org.junit.Test;
 
@@ -33,10 +33,10 @@ public class ShowIntroTest extends BaseTest {
     private ShowIntro showIntroResume;
 
     public ShowIntroTest() {
-        TestGameConfig tgc1 = new TestGameConfig();
+        TestGameComponents tgc1 = new TestGameComponents();
         showIntro = tgc1.showIntro();
 
-        TestGameConfig tgc2 = new TestGameConfig();
+        TestGameComponents tgc2 = new TestGameComponents();
         showIntroResume = tgc2.showIntro();
         tgc2.repositoryConfig().gameProgressRepository().save(beginProgress().increaseCharacterExperience(500));
     }
