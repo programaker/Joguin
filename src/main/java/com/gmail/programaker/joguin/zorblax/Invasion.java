@@ -1,38 +1,38 @@
 package com.gmail.programaker.joguin.zorblax;
 
-import com.gmail.programaker.joguin.earth.Location;
+import com.gmail.programaker.joguin.earth.City;
 
 import java.io.Serializable;
 
 public class Invasion implements Serializable {
     private static final long serialVersionUID = 1L;
     private final TerraformDevice terraformDevice;
-    private final Location location;
-    private final boolean alienDominatedLocation;
+    private final City city;
+    private final boolean alienDominatedCity;
 
-    public Invasion(TerraformDevice terraformDevice, Location location) {
-        this(terraformDevice, location, true);
+    public Invasion(TerraformDevice terraformDevice, City city) {
+        this(terraformDevice, city, true);
     }
 
     public TerraformDevice getTerraformDevice() {
         return terraformDevice;
     }
 
-    public Location getLocation() {
-        return location;
+    public City getCity() {
+        return city;
     }
 
-    public boolean isAlienDominatedLocation() {
-        return alienDominatedLocation;
+    public boolean isAlienDominatedCity() {
+        return alienDominatedCity;
     }
 
     public Invasion defeat() {
-        return new Invasion(terraformDevice, location, false);
+        return new Invasion(terraformDevice, city, false);
     }
 
-    private Invasion(TerraformDevice terraformDevice, Location location, boolean alienDominatedLocation) {
+    private Invasion(TerraformDevice terraformDevice, City city, boolean alienDominatedCity) {
         this.terraformDevice = terraformDevice;
-        this.location = location;
-        this.alienDominatedLocation = alienDominatedLocation;
+        this.city = city;
+        this.alienDominatedCity = alienDominatedCity;
     }
 }

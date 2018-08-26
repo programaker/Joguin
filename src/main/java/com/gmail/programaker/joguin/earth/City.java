@@ -2,18 +2,18 @@ package com.gmail.programaker.joguin.earth;
 
 import java.io.Serializable;
 
-public class Location implements Serializable {
+public class City implements Serializable {
     private static final long serialVersionUID = 1L;
-    private final String city;
+    private final String name;
     private final String country;
 
-    public Location(String city, String country) {
-        this.city = city;
+    public City(String name, String country) {
+        this.name = name;
         this.country = country;
     }
 
-    public String getCity() {
-        return city;
+    public String getName() {
+        return name;
     }
 
     public String getCountry() {

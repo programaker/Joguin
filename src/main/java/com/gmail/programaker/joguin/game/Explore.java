@@ -1,6 +1,6 @@
 package com.gmail.programaker.joguin.game;
 
-import com.gmail.programaker.joguin.earth.Location;
+import com.gmail.programaker.joguin.earth.City;
 import com.gmail.programaker.joguin.util.AskPlayer;
 import com.gmail.programaker.joguin.util.Messages;
 import com.gmail.programaker.joguin.zorblax.Invasion;
@@ -79,13 +79,13 @@ public class Explore {
         }
 
         private void printInvasion(Invasion invasion, int i, Consumer<String> println) {
-            Location location = invasion.getLocation();
+            City city = invasion.getCity();
 
-            String key = invasion.isAlienDominatedLocation()
-                ? "alien-dominated-location"
-                : "human-dominated-location";
+            String key = invasion.isAlienDominatedCity()
+                ? "alien-dominated-city"
+                : "human-dominated-city";
 
-            println.accept(Messages.get(key, messages, i+1, location.getCity(), location.getCountry()));
+            println.accept(Messages.get(key, messages, i+1, city.getName(), city.getCountry()));
         }
 
         private Predicate<String> validateOptionFn(int invasionCount) {

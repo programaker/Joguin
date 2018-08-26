@@ -1,7 +1,7 @@
 package com.gmail.programaker.joguin.game;
 
 import com.gmail.programaker.joguin.config.TestGameConfig;
-import com.gmail.programaker.joguin.earth.Location;
+import com.gmail.programaker.joguin.earth.City;
 import com.gmail.programaker.joguin.earth.MainCharacter;
 import com.gmail.programaker.joguin.util.BaseTest;
 import com.gmail.programaker.joguin.zorblax.Invasion;
@@ -60,7 +60,7 @@ public class FightTest extends BaseTest {
         String aliensWonF = MessageFormat.format(aliensWon, 50);
         assertEquals("Should have printed alien victory", aliensWonF, fakeConsole.get(fakeConsole.size() - 1));
         assertEquals("Character should have gained half Device's power of experience", 50, progress.getCharacterExperience());
-        assertTrue("Location should be still dominated by the aliens", progress.getInvasion(1).isAlienDominatedLocation());
+        assertTrue("City should be still dominated by the aliens", progress.getInvasion(1).isAlienDominatedCity());
         assertEquals("Should have going back to Explore", "Explore", nextStep.name());
     }
 
@@ -74,7 +74,7 @@ public class FightTest extends BaseTest {
         String earthWonF = MessageFormat.format(earthWon, 150);
         assertEquals("Should have printed Earth's victory", earthWonF, fakeConsole.get(fakeConsole.size() - 1));
         assertEquals("Character should have gained half Device's power of experience", 150, progress.getCharacterExperience());
-        assertFalse("Location should be free from the aliens", progress.getInvasion(1).isAlienDominatedLocation());
+        assertFalse("City should be free from the aliens", progress.getInvasion(1).isAlienDominatedCity());
         assertEquals("Should have going back to Explore", "Explore", nextStep.name());
     }
 
@@ -93,7 +93,7 @@ public class FightTest extends BaseTest {
 
         assertEquals("Should have printed location saved message", locationAlreadySaved, fakeConsole.get(0));
         assertEquals("Character experience should be the same", 200, progress.getCharacterExperience());
-        assertFalse("Location should still be free from the aliens", progress.getInvasion(1).isAlienDominatedLocation());
+        assertFalse("City should still be free from the aliens", progress.getInvasion(1).isAlienDominatedCity());
         assertEquals("Should have going back to Explore", "Explore", nextStep.name());
     }
 
@@ -182,7 +182,7 @@ public class FightTest extends BaseTest {
         MainCharacter character = new MainCharacter("Barbarella", MainCharacter.Gender.FEMALE, 30);
 
         List<Invasion> invasions = Collections.singletonList(
-            new Invasion(new TerraformDevice(100), new Location("Rio de Janeiro", "Brazil"))
+            new Invasion(new TerraformDevice(100), new City("Rio de Janeiro", "Brazil"))
         );
 
         return new GameProgress(character, invasions);

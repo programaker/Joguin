@@ -1,6 +1,6 @@
 package com.gmail.programaker.joguin.game;
 
-import com.gmail.programaker.joguin.earth.LocationRepository;
+import com.gmail.programaker.joguin.earth.CityRepository;
 import com.gmail.programaker.joguin.earth.MainCharacter;
 import com.gmail.programaker.joguin.util.AskPlayer;
 import com.gmail.programaker.joguin.util.Messages;
@@ -16,16 +16,16 @@ import java.util.stream.Collectors;
 
 public class CreateCharacter {
     private final Properties messages;
-    private final LocationRepository locationRepository;
+    private final CityRepository cityRepository;
     private final Explore exploreStep;
 
     public CreateCharacter(
         Properties messages,
-        LocationRepository locationRepository,
+        CityRepository cityRepository,
         Explore exploreStep
     ) {
         this.messages = messages;
-        this.locationRepository = locationRepository;
+        this.cityRepository = cityRepository;
         this.exploreStep = exploreStep;
     }
 
@@ -86,7 +86,7 @@ public class CreateCharacter {
         }
 
         private GameProgress initGameProgress(MainCharacter character) {
-            List<Invasion> invasions = locationRepository.findAll()
+            List<Invasion> invasions = cityRepository.findAll()
                 .stream()
                 .map(InvaderArmy::invade)
                 .collect(Collectors.toList());

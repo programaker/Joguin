@@ -41,7 +41,7 @@
 				</configuration>
 			</plugin>
 
-			<!-- Generates the executable jar for the Command Line Interface project -->
+			<!-- Generates the executable jar for the game -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>

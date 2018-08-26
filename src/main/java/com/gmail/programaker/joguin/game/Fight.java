@@ -50,9 +50,9 @@ public class Fight {
         @Override
         public GameStep interactWithPlayer(Consumer<String> print, Iterator<String> playerAnswers) {
             Invasion invasion = gameProgress.getInvasion(selectedInvasion);
-            String city = invasion.getLocation().getCity();
+            String city = invasion.getCity().getName();
 
-            if (invasion.isAlienDominatedLocation()) {
+            if (invasion.isAlienDominatedCity()) {
                 TerraformDevice device = invasion.getTerraformDevice();
                 MainCharacter character = gameProgress.getCharacter();
 
@@ -74,7 +74,7 @@ public class Fight {
                     fight(device, city, print);
                 }
             } else {
-                print.accept(Messages.get("location-already-saved", messages, city));
+                print.accept(Messages.get("city-already-saved", messages, city));
             }
 
             return explore.start(gameProgress);

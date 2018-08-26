@@ -51,7 +51,7 @@ public class GameProgress implements Serializable {
     public GameProgress defeatInvasion(int selectedInvasion) {
         Invasion invasion = getInvasion(selectedInvasion);
 
-        if (invasion.isAlienDominatedLocation()) {
+        if (invasion.isAlienDominatedCity()) {
             invasions.set(index(selectedInvasion), invasion.defeat());
             defeatedInvasions++;
         }

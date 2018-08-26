@@ -30,20 +30,15 @@ public class ShowIntroTest extends BaseTest {
     private final String welcomeBack = "\nWelcome back, commander Uhura! You have 500 points of experience.\n";
 
     private ShowIntro showIntro;
-    private GameProgressRepository emptyGameProgressRepository;
-
     private ShowIntro showIntroResume;
-    private GameProgressRepository fullGameProgressRepository;
 
     public ShowIntroTest() {
         TestGameConfig tgc1 = new TestGameConfig();
         showIntro = tgc1.showIntro();
-        emptyGameProgressRepository = tgc1.repositoryConfig().gameProgressRepository();
 
         TestGameConfig tgc2 = new TestGameConfig();
         showIntroResume = tgc2.showIntro();
-        fullGameProgressRepository = tgc2.repositoryConfig().gameProgressRepository();
-        fullGameProgressRepository.save(beginProgress().increaseCharacterExperience(500));
+        tgc2.repositoryConfig().gameProgressRepository().save(beginProgress().increaseCharacterExperience(500));
     }
 
     @Test
