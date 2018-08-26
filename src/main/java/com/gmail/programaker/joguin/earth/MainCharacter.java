@@ -1,12 +1,14 @@
 package com.gmail.programaker.joguin.earth;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class MainCharacter {
+public class MainCharacter implements Serializable {
+    private static final long serialVersionUID = 1L;
     private final String name;
     private final Gender gender;
     private final int age;

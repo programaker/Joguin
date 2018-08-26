@@ -19,23 +19,23 @@ import java.util.function.Predicate;
 public class Explore {
     private final MessageSource messages;
     private final Consumer<Long> sleep;
-    private final Fight fightStep;
+    private final Fight fight;
     private final GameOver gameOver;
-    private final Quit quitStep;
+    private final Quit quit;
 
     @Autowired
     public Explore(
         @Qualifier("ExploreMessages") MessageSource messages,
         Consumer<Long> sleep,
-        @Lazy Fight fightStep, //To solve circular dependency
+        @Lazy Fight fight, //To solve circular dependency
         GameOver gameOver,
-        Quit quitStep
+        Quit quit
     ) {
         this.messages = messages;
         this.sleep = sleep;
-        this.fightStep = fightStep;
+        this.fight = fight;
         this.gameOver = gameOver;
-        this.quitStep = quitStep;
+        this.quit = quit;
     }
 
     public GameStep start(GameProgress gameProgress) {
@@ -77,11 +77,11 @@ public class Explore {
             );
 
             if (option.equals("q")) {
-                return quitStep.start();
+                return quit.start(gameProgress);
             }
 
             int selectedInvasion = Integer.parseInt(option);
-            return fightStep.start(selectedInvasion, gameProgress);
+            return fight.start(selectedInvasion, gameProgress);
         }
 
         private void printInvasion(Invasion invasion, int i, Consumer<String> println) {

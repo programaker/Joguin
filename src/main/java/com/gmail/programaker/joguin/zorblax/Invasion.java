@@ -2,7 +2,10 @@ package com.gmail.programaker.joguin.zorblax;
 
 import com.gmail.programaker.joguin.earth.Location;
 
-public class Invasion {
+import java.io.Serializable;
+
+public class Invasion implements Serializable {
+    private static final long serialVersionUID = 1L;
     private final TerraformDevice terraformDevice;
     private final Location location;
     private final boolean alienDominatedLocation;

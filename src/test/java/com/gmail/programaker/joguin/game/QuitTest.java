@@ -1,6 +1,10 @@
 package com.gmail.programaker.joguin.game;
 
+import com.gmail.programaker.joguin.earth.Location;
+import com.gmail.programaker.joguin.earth.MainCharacter;
 import com.gmail.programaker.joguin.util.BaseTest;
+import com.gmail.programaker.joguin.zorblax.InvaderArmy;
+import com.gmail.programaker.joguin.zorblax.Invasion;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,7 +28,7 @@ public class QuitTest extends BaseTest {
     public void interactionsWithPlayer() {
         List<String> fakeConsole = new ArrayList<>();
 
-        quit.start().interactWithPlayer(
+        quit.start(progress()).interactWithPlayer(
             fakeConsole::add,
             Collections.singletonList("N").iterator()
         );
@@ -34,19 +38,19 @@ public class QuitTest extends BaseTest {
 
     @Test
     public void givenValidOption() {
-        GameStep nextStep = quit.start().interactWithPlayer(
+        GameStep nextStep = quit.start(progress()).interactWithPlayer(
             blackHoleConsole,
             Collections.singletonList("N").iterator()
         );
 
-        assertTrue("Should have gone to GameOver step", nextStep instanceof GameOver);
+        assertEquals("Should have gone to GameOver step", "GameOver", nextStep.name());
     }
 
     @Test
     public void givenInvalidOption() {
         List<String> fakeConsole = new ArrayList<>();
 
-        quit.start().interactWithPlayer(
+        quit.start(progress()).interactWithPlayer(
             fakeConsole::add,
             Arrays.asList("A", "9", "Y").iterator()
         );
@@ -62,5 +66,28 @@ public class QuitTest extends BaseTest {
         assertEquals(errorInvalidOption, fakeConsole.get(i++));
 
         assertEquals(wantToSaveGame, fakeConsole.get(i++));
+    }
+
+    @Test
+    public void quitWithoutGameProgressToSave() {
+        List<String> fakeConsole = new ArrayList<>();
+
+        GameStep nextStep = quit.start().interactWithPlayer(
+            fakeConsole::add,
+            Collections.<String>emptyList().iterator()
+        );
+
+        assertTrue("No messages to the user should have been printed", fakeConsole.isEmpty());
+        assertEquals("Should have gone to GameOver step", "GameOver", nextStep.name());
+    }
+
+    private GameProgress progress() {
+        MainCharacter character = new MainCharacter("Start Lord", MainCharacter.Gender.MALE, 30);
+
+        List<Invasion> invasions = Collections.singletonList(
+            InvaderArmy.invade(new Location("Sydney", "Australia"))
+        );
+
+        return new GameProgress(character, invasions);
     }
 }

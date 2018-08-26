@@ -1,6 +1,7 @@
 package com.gmail.programaker.joguin.game;
 
 import com.gmail.programaker.joguin.util.BaseTest;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,7 +24,8 @@ public class ShowIntroTest extends BaseTest {
         "We managed to discover their locations and they will be sent to you, but beware! The Devices\n" +
         "have strong defenses!\n";
 
-    private final String start = "\n(N)ew Game, (C)ontinue, (Q)uit:\n";
+    private final String start = "\n(N)ew Game, (Q)uit:\n";
+    private final String startWithResume = "\n(N)ew Game, (R)esume, (Q)uit:\n";
     private final String errorInvalidOption = "Invalid option\n";
 
     @Autowired
@@ -63,14 +65,14 @@ public class ShowIntroTest extends BaseTest {
         assertEquals("Should have gone to Quit step", "Quit", nextStep.name());
     }
 
-    @Test
-    public void whenThePlayerAsksToContinueGame() {
+    @Test @Ignore
+    public void whenThePlayerAsksToResumeGame() {
         GameStep nextStep = showIntro.start().interactWithPlayer(
             blackHoleConsole,
-            Collections.singletonList("C").iterator()
+            Collections.singletonList("R").iterator()
         );
 
-        assertEquals("Should have gone to Continue step", "Continue", nextStep.name());
+        assertEquals("Should have gone to Explore step", "Explore", nextStep.name());
     }
 
     @Test

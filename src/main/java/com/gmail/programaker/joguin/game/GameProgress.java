@@ -3,11 +3,14 @@ package com.gmail.programaker.joguin.game;
 import com.gmail.programaker.joguin.earth.MainCharacter;
 import com.gmail.programaker.joguin.zorblax.Invasion;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class GameProgress {
+public class GameProgress implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private final MainCharacter character;
     private final List<Invasion> invasions;
     private int characterExperience;

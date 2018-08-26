@@ -9,25 +9,30 @@ import org.springframework.stereotype.Component;
 
 import java.util.Iterator;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 @Component
 public class ShowIntro {
     private final MessageSource messages;
+    private final GameProgressRepository repository;
     private final CreateCharacter createCharacterStep;
-    private final Continue continueStep;
+    private final Explore explore;
     private final Quit quitStep;
 
     @Autowired
     public ShowIntro(
         @Qualifier("ShowIntroMessages") MessageSource messages,
-        CreateCharacter createCharacterStep,
-        Continue continueStep,
-        Quit quitStep
+        GameProgressRepository repository,
+        CreateCharacter createCharacter,
+        Explore explore,
+        Quit quit
     ) {
         this.messages = messages;
-        this.createCharacterStep = createCharacterStep;
-        this.continueStep = continueStep;
-        this.quitStep = quitStep;
+        this.repository = repository;
+        this.createCharacterStep = createCharacter;
+        this.explore = explore;
+        this.quitStep = quit;
     }
 
     public GameStep start() {
@@ -44,31 +49,43 @@ public class ShowIntro {
         public GameStep interactWithPlayer(Consumer<String> print, Iterator<String> playerAnswers) {
             print.accept(Messages.get("intro", messages));
 
-            String option = AskPlayer.to(Messages.get("start", messages),
+            boolean savedProgressExists = repository.savedProgressExists();
+            String startKey = savedProgressExists ? "start-with-resume" : "start";
+
+            String option = AskPlayer.to(Messages.get(startKey, messages),
                 Messages.get("error-invalid-option", messages),
                 print,
                 playerAnswers,
                 String::toLowerCase,
-                this::validateOption
+                validateOption(savedProgressExists)
             );
 
             if (option.equals("n")) {
                 return createCharacterStep.start();
             }
 
-            if (option.equals("c")) {
-                return continueStep.start();
+            if (option.equals("r")) {
+                return repository.restore()
+                    .map(progress -> welcomeBack(progress, print))
+                    .orElseGet(createCharacterStep::start);
             }
 
             if (option.equals("q")) {
                 return quitStep.start();
             }
 
-            return new GameOver();
+            return null; //Very very unlikely to happen
         }
 
-        private boolean validateOption(String option) {
-            return option.equals("n") || option.equals("c") || option.equals("q");
+        private GameStep welcomeBack(GameProgress progress, Consumer<String> print) {
+            print.accept(Messages.get("welcome-back", messages, progress.getCharacter().getName()));
+            return explore.start(progress);
+        }
+
+        private Predicate<String> validateOption(boolean savedProgressExists) {
+            return savedProgressExists
+                ? option -> option.equals("n") || option.equals("r") || option.equals("q")
+                : option -> option.equals("n") || option.equals("q");
         }
     }
 }

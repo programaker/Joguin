@@ -7,15 +7,15 @@ import java.util.Locale;
 
 @Component
 public class Game {
-    private final ShowIntro showIntroStep;
+    private final ShowIntro showIntro;
 
     @Autowired
-    public Game(ShowIntro showIntroStep) {
-        this.showIntroStep = showIntroStep;
+    public Game(ShowIntro showIntro) {
+        this.showIntro = showIntro;
     }
 
     public GameStep start() {
         Locale.setDefault(Locale.US);
-        return showIntroStep.start();
+        return showIntro.start();
     }
 }

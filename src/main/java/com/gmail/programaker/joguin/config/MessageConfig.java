@@ -38,6 +38,12 @@ public class MessageConfig {
         return messageSource("FightMessages");
     }
 
+    @Bean
+    @Qualifier("SaveGameMessages")
+    public MessageSource saveGameMessages() {
+        return messageSource("SaveGameMessages");
+    }
+
     private MessageSource messageSource(String basename) {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasename(basename);

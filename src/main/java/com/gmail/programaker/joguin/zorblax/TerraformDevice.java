@@ -1,6 +1,9 @@
 package com.gmail.programaker.joguin.zorblax;
 
-public class TerraformDevice {
+import java.io.Serializable;
+
+public class TerraformDevice implements Serializable {
+    private static final long serialVersionUID = 1L;
     private final int defensePower;
 
     public TerraformDevice(int defensePower) {
