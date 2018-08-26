@@ -4,6 +4,7 @@
 log
 saved-game
 .DS_Store
+.mvn
 
 ### STS ###
 .apt_generated
