@@ -68,7 +68,7 @@ public abstract class GameComponents {
         game = new Game(showIntro);
     }
     
-    public final RepositoryFactory repositoryConfig() {
+    public final RepositoryFactory repositoryFactory() {
         return repositoryFactory;
     }
 

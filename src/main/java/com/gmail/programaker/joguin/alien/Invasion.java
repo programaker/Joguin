@@ -26,7 +26,7 @@ public class Invasion implements Serializable {
         return alienDominatedCity;
     }
 
-    public Invasion defeat() {
+    public Invasion defeated() {
         return new Invasion(terraformDevice, city, false);
     }
 

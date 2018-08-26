@@ -38,7 +38,7 @@ public class ShowIntroTest extends BaseTest {
 
         TestGameComponents tgc2 = new TestGameComponents();
         showIntroResume = tgc2.showIntro();
-        tgc2.repositoryConfig().gameProgressRepository().save(beginProgress().increaseCharacterExperience(500));
+        tgc2.repositoryFactory().gameProgressRepository().save(beginProgress().increaseCharacterExperience(500));
     }
 
     @Test

@@ -13,7 +13,12 @@ public class GameProgress implements Serializable {
 
     private final MainCharacter character;
     private final List<Invasion> invasions;
+
+    //The experience is not in the MainCharacter to enable
+    //the possibility of reuse the same character in a new game,
+    //with 0 experience
     private int characterExperience;
+
     private int defeatedInvasions;
 
     public GameProgress(MainCharacter character, List<Invasion> invasions) {
@@ -52,7 +57,7 @@ public class GameProgress implements Serializable {
         Invasion invasion = getInvasion(selectedInvasion);
 
         if (invasion.isAlienDominatedCity()) {
-            invasions.set(index(selectedInvasion), invasion.defeat());
+            invasions.set(index(selectedInvasion), invasion.defeated());
             defeatedInvasions++;
         }
 

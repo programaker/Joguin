@@ -30,10 +30,10 @@ public class SaveGameTest extends BaseTest {
         GameComponents saveGameErrorGameComponents = new SaveGameErrorGameComponents();
 
         saveGame = testGameComponents.saveGame();
-        saveGameRepository = testGameComponents.repositoryConfig().gameProgressRepository();
+        saveGameRepository = testGameComponents.repositoryFactory().gameProgressRepository();
 
         errorSaveGame = saveGameErrorGameComponents.saveGame();
-        errorSaveGameRepository = saveGameErrorGameComponents.repositoryConfig().gameProgressRepository();
+        errorSaveGameRepository = saveGameErrorGameComponents.repositoryFactory().gameProgressRepository();
     }
 
     @Test
