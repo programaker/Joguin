@@ -1,7 +1,9 @@
 package com.gmail.programaker.joguin.config;
 
-import com.gmail.programaker.joguin.earth.CityRepository;
+import com.gmail.programaker.joguin.earth.city.CityRepository;
 import com.gmail.programaker.joguin.game.*;
+import com.gmail.programaker.joguin.game.progress.GameProgressRepository;
+import com.gmail.programaker.joguin.game.step.*;
 
 import java.util.function.Consumer;
 

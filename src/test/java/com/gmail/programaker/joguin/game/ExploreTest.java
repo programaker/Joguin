@@ -1,6 +1,9 @@
 package com.gmail.programaker.joguin.game;
 
 import com.gmail.programaker.joguin.config.TestGameComponents;
+import com.gmail.programaker.joguin.game.progress.GameProgress;
+import com.gmail.programaker.joguin.game.step.Explore;
+import com.gmail.programaker.joguin.game.step.GameStep;
 import com.gmail.programaker.joguin.util.BaseTest;
 import org.junit.Test;
 

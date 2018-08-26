@@ -1,8 +1,8 @@
 package com.gmail.programaker.joguin.util;
 
-import com.gmail.programaker.joguin.earth.City;
+import com.gmail.programaker.joguin.earth.city.City;
 import com.gmail.programaker.joguin.earth.MainCharacter;
-import com.gmail.programaker.joguin.game.GameProgress;
+import com.gmail.programaker.joguin.game.progress.GameProgress;
 import com.gmail.programaker.joguin.zorblax.InvaderArmy;
 import com.gmail.programaker.joguin.zorblax.Invasion;
 

@@ -1,6 +1,6 @@
 package com.gmail.programaker.joguin.zorblax;
 
-import com.gmail.programaker.joguin.earth.City;
+import com.gmail.programaker.joguin.earth.city.City;
 
 import java.io.Serializable;
 

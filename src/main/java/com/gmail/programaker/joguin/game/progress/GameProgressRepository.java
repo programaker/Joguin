@@ -1,4 +1,4 @@
-package com.gmail.programaker.joguin.game;
+package com.gmail.programaker.joguin.game.progress;
 
 import java.util.Optional;
 

@@ -1,4 +1,7 @@
-package com.gmail.programaker.joguin.config;
+package com.gmail.programaker.joguin.game;
+
+import com.gmail.programaker.joguin.config.GameComponents;
+import com.gmail.programaker.joguin.config.StandardRepositoryConfig;
 
 public class StandardGameComponents extends GameComponents {
     public StandardGameComponents() {

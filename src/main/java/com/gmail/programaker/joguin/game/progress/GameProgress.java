@@ -1,4 +1,4 @@
-package com.gmail.programaker.joguin.game;
+package com.gmail.programaker.joguin.game.progress;
 
 import com.gmail.programaker.joguin.earth.MainCharacter;
 import com.gmail.programaker.joguin.zorblax.Invasion;

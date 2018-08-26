@@ -1,5 +1,6 @@
-package com.gmail.programaker.joguin.game;
+package com.gmail.programaker.joguin.game.step;
 
+import com.gmail.programaker.joguin.game.progress.GameProgress;
 import com.gmail.programaker.joguin.util.AskPlayer;
 import com.gmail.programaker.joguin.util.Messages;
 

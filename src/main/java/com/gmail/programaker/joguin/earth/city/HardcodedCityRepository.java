@@ -1,4 +1,4 @@
-package com.gmail.programaker.joguin.earth;
+package com.gmail.programaker.joguin.earth.city;
 
 import java.util.Arrays;
 import java.util.List;
