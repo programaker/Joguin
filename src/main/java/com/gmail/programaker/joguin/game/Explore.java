@@ -18,17 +18,23 @@ import java.util.function.Predicate;
 @Component
 public class Explore {
     private final MessageSource messages;
+    private final Consumer<Long> sleep;
     private final Fight fightStep;
+    private final GameOver gameOver;
     private final Quit quitStep;
 
     @Autowired
     public Explore(
         @Qualifier("ExploreMessages") MessageSource messages,
+        Consumer<Long> sleep,
         @Lazy Fight fightStep, //To solve circular dependency
+        GameOver gameOver,
         Quit quitStep
     ) {
         this.messages = messages;
+        this.sleep = sleep;
         this.fightStep = fightStep;
+        this.gameOver = gameOver;
         this.quitStep = quitStep;
     }
 
@@ -50,11 +56,16 @@ public class Explore {
 
         @Override
         public GameStep interactWithPlayer(Consumer<String> print, Iterator<String> playerAnswers) {
-            print.accept("\n");
             List<Invasion> invasions = gameProgress.getInvasions();
-
+            print.accept("\n");
             for (int i = 0; i < invasions.size(); i++) {
                 printInvasion(invasions.get(i), i, print);
+            }
+
+            if (gameProgress.allInvasionsDefeated()) {
+                print.accept(Messages.get("mission-accomplished", messages));
+                sleep.accept(10000L);
+                return gameOver;
             }
 
             String option = AskPlayer.to(Messages.get("where-do-you-want-to-go", messages, 1, invasions.size()),

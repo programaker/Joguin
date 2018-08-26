@@ -13,12 +13,15 @@ import java.util.function.Consumer;
 @Component
 public class Quit {
     private final MessageSource messages;
+    private final GameOver gameOver;
 
     @Autowired
     public Quit(
-        @Qualifier("QuitMessages") MessageSource messages
+        @Qualifier("QuitMessages") MessageSource messages,
+        GameOver gameOver
     ) {
         this.messages = messages;
+        this.gameOver = gameOver;
     }
 
     public GameStep start() {
@@ -45,7 +48,7 @@ public class Quit {
                 //Save the game
             }
 
-            return new GameOver();
+            return gameOver;
         }
 
         private boolean validateSaveGame(String saveGame) {

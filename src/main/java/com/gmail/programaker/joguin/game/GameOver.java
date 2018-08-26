@@ -1,8 +1,11 @@
 package com.gmail.programaker.joguin.game;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Iterator;
 import java.util.function.Consumer;
 
+@Component
 public class GameOver implements GameStep {
     @Override
     public String name() {
