@@ -1,11 +1,16 @@
 package com.gmail.programaker.joguin.game;
 
+import com.gmail.programaker.joguin.config.TestGameConfig;
 import com.gmail.programaker.joguin.util.BaseTest;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
-import static com.gmail.programaker.joguin.config.TestConfig.*;
+import static com.gmail.programaker.joguin.util.TestUtil.beginProgress;
+import static com.gmail.programaker.joguin.util.TestUtil.blackHoleConsole;
 import static org.junit.Assert.assertEquals;
 
 public class ShowIntroTest extends BaseTest {
@@ -15,7 +20,7 @@ public class ShowIntroTest extends BaseTest {
         "To do so, they installed several Terraform Devices around the planet, to make our environment\n" +
         "suitable for their biology, extinguishing all earthlings in the process.\n" +
         "\n" +
-        "Your job is to lead humanity's army in a mission to destroy all Terraform Devices.\n" +
+        "Your job is to lead the army of humanity in a mission to destroy all Terraform Devices.\n" +
         "We managed to discover their locations and they will be sent to you, but beware! The Devices\n" +
         "have strong defenses!\n";
 
@@ -24,19 +29,28 @@ public class ShowIntroTest extends BaseTest {
     private final String errorInvalidOption = "Invalid option\n";
     private final String welcomeBack = "\nWelcome back, commander Uhura! You have 500 points of experience.\n";
 
-    private Properties messages;
+    private ShowIntro showIntro;
+    private GameProgressRepository emptyGameProgressRepository;
 
-    private CreateCharacter createCharacter;
+    private ShowIntro showIntroResume;
+    private GameProgressRepository fullGameProgressRepository;
 
-    private Explore explore;
+    public ShowIntroTest() {
+        TestGameConfig tgc1 = new TestGameConfig();
+        showIntro = tgc1.showIntro();
+        emptyGameProgressRepository = tgc1.repositoryConfig().gameProgressRepository();
 
-    private Quit quit;
+        TestGameConfig tgc2 = new TestGameConfig();
+        showIntroResume = tgc2.showIntro();
+        fullGameProgressRepository = tgc2.repositoryConfig().gameProgressRepository();
+        fullGameProgressRepository.save(beginProgress().increaseCharacterExperience(500));
+    }
 
     @Test
     public void interactionsWithPlayerWithoutGameToResume() {
         List<String> fakeConsole = new ArrayList<>();
 
-        showIntro(emptyGameProgressRepository).start().interactWithPlayer(
+        showIntro.start().interactWithPlayer(
             fakeConsole::add,
             Collections.singletonList("Q").iterator()
         );
@@ -50,7 +64,7 @@ public class ShowIntroTest extends BaseTest {
     public void interactionsWithPlayerWithGameToResume() {
         List<String> fakeConsole = new ArrayList<>();
 
-        showIntro(fullGameProgressRepository).start().interactWithPlayer(
+        showIntroResume.start().interactWithPlayer(
             fakeConsole::add,
             Collections.singletonList("Q").iterator()
         );
@@ -62,7 +76,7 @@ public class ShowIntroTest extends BaseTest {
 
     @Test
     public void whenThePlayerAsksToStartNewGame() {
-        GameStep nextStep = showIntro(emptyGameProgressRepository).start().interactWithPlayer(
+        GameStep nextStep = showIntro.start().interactWithPlayer(
             blackHoleConsole,
             Collections.singletonList("N").iterator()
         );
@@ -72,7 +86,7 @@ public class ShowIntroTest extends BaseTest {
 
     @Test
     public void whenThePlayerAsksToQuit() {
-        GameStep nextStep = showIntro(emptyGameProgressRepository).start().interactWithPlayer(
+        GameStep nextStep = showIntro.start().interactWithPlayer(
             blackHoleConsole,
             Collections.singletonList("Q").iterator()
         );
@@ -84,10 +98,7 @@ public class ShowIntroTest extends BaseTest {
     public void whenThePlayerAsksToResumeGame() {
         List<String> fakeConsole = new ArrayList<>();
 
-        MockGameProgressRepository repo = new MockGameProgressRepository(false);
-        repo.save(beginProgress().increaseCharacterExperience(500));
-
-        GameStep nextStep = showIntro(repo).start().interactWithPlayer(
+        GameStep nextStep = showIntroResume.start().interactWithPlayer(
             fakeConsole::add,
             Collections.singletonList("R").iterator()
         );
@@ -103,7 +114,7 @@ public class ShowIntroTest extends BaseTest {
     public void givenInvalidOption() {
         List<String> fakeConsole = new ArrayList<>();
 
-        showIntro(emptyGameProgressRepository).start().interactWithPlayer(
+        showIntro.start().interactWithPlayer(
             fakeConsole::add,
             Arrays.asList(" ", "meh", "N").iterator()
         );
@@ -118,9 +129,5 @@ public class ShowIntroTest extends BaseTest {
         assertEquals(errorInvalidOption, fakeConsole.get(i++));
 
         assertEquals(start, fakeConsole.get(i++));
-    }
-
-    private ShowIntro showIntro(GameProgressRepository repository) {
-        return new ShowIntro(messages, repository, createCharacter, explore, quit);
     }
 }

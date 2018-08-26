@@ -1,5 +1,6 @@
 package com.gmail.programaker.joguin.game;
 
+import com.gmail.programaker.joguin.config.TestGameConfig;
 import com.gmail.programaker.joguin.earth.Location;
 import com.gmail.programaker.joguin.earth.MainCharacter;
 import com.gmail.programaker.joguin.util.BaseTest;
@@ -44,6 +45,10 @@ public class FightTest extends BaseTest {
         "Life is slowly getting back to normal!\n";
 
     private Fight fight;
+
+    public FightTest() {
+        fight = new TestGameConfig().fight();
+    }
 
     @Test
     public void playerFightsAndLoses() {

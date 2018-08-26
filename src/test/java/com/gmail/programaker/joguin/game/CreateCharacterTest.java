@@ -1,5 +1,6 @@
 package com.gmail.programaker.joguin.game;
 
+import com.gmail.programaker.joguin.config.TestGameConfig;
 import com.gmail.programaker.joguin.util.BaseTest;
 import org.junit.Test;
 
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.gmail.programaker.joguin.config.TestConfig.blackHoleConsole;
+import static com.gmail.programaker.joguin.util.TestUtil.blackHoleConsole;
 import static org.junit.Assert.assertEquals;
 
 public class CreateCharacterTest extends BaseTest {
@@ -26,6 +27,10 @@ public class CreateCharacterTest extends BaseTest {
     private final String errorInvalidAge = "Invalid age. You must be at least 18 to defend Earth\n";
 
     private CreateCharacter createCharacter;
+
+    public CreateCharacterTest() {
+        createCharacter = new TestGameConfig().createCharacter();
+    }
 
     @Test
     public void interactionsWithPlayer() {

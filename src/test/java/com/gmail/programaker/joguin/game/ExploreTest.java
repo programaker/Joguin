@@ -1,5 +1,6 @@
 package com.gmail.programaker.joguin.game;
 
+import com.gmail.programaker.joguin.config.TestGameConfig;
 import com.gmail.programaker.joguin.util.BaseTest;
 import org.junit.Test;
 
@@ -8,8 +9,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static com.gmail.programaker.joguin.config.TestConfig.beginProgress;
-import static com.gmail.programaker.joguin.config.TestConfig.blackHoleConsole;
+import static com.gmail.programaker.joguin.util.TestUtil.beginProgress;
+import static com.gmail.programaker.joguin.util.TestUtil.blackHoleConsole;
 import static org.junit.Assert.assertEquals;
 
 public class ExploreTest extends BaseTest {
@@ -32,6 +33,10 @@ public class ExploreTest extends BaseTest {
         "THE END.\n";
 
     private Explore explore;
+
+    public ExploreTest() {
+        explore = new TestGameConfig().explore();
+    }
 
     @Test
     public void interactionsWithPlayer() {

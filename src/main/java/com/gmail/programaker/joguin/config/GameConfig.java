@@ -5,36 +5,45 @@ import com.gmail.programaker.joguin.game.*;
 
 import java.util.function.Consumer;
 
-public interface GameConfig {
-    RepositoryConfig repositoryConfig();
-    Consumer<Long> sleep();
+public abstract class GameConfig {
+    private final SaveGame saveGame;
+    private final Quit quit;
+    private final Fight fight;
+    private final GameOver gameOver;
+    private final Explore explore;
+    private final CreateCharacter createCharacter;
+    private final ShowIntro showIntro;
+    private final Game game;
+    private final MessageConfig messageConfig;
+    private final RepositoryConfig repositoryConfig;
+    private final Consumer<Long> sleep;
 
-    default Game game() {
-        MessageConfig mc = messageConfig();
-        RepositoryConfig rc = repositoryConfig();
-        Consumer<Long> sleep = sleep();
+    public GameConfig(RepositoryConfig repositoryConfig, Consumer<Long> sleep) {
+        this.repositoryConfig = repositoryConfig;
+        this.sleep = sleep;
+        messageConfig = new MessageConfig();
 
-        LocationRepository locationRepository = rc.locationRepository();
-        GameProgressRepository gameProgressRepository = rc.gameProgressRepository();
+        LocationRepository locationRepository = repositoryConfig.locationRepository();
+        GameProgressRepository gameProgressRepository = repositoryConfig.gameProgressRepository();
 
-        GameOver gameOver = new GameOver();
+        gameOver = new GameOver();
 
-        SaveGame saveGame = new SaveGame(
-            mc.saveGameMessages(),
+        saveGame = new SaveGame(
+            messageConfig.saveGameMessages(),
             gameProgressRepository,
             gameOver
         );
 
-        Quit quit = new Quit(
-            mc.quitMessages(),
+        quit = new Quit(
+            messageConfig.quitMessages(),
             saveGame,
             gameOver
         );
 
-        //These two have a circular dependecy
-        Fight fight = new Fight(mc.fightMessages(), sleep);
-        Explore explore = new Explore(
-            mc.exploreMessages(),
+        //These two have a circular dependency =(
+        fight = new Fight(messageConfig.fightMessages(), sleep);
+        explore = new Explore(
+            messageConfig.exploreMessages(),
             sleep,
             fight,
             gameOver,
@@ -42,24 +51,64 @@ public interface GameConfig {
         );
         fight.setExplore(explore);
 
-        CreateCharacter createCharacter = new CreateCharacter(
-            mc.createCharacterMessages(),
+        createCharacter = new CreateCharacter(
+            messageConfig.createCharacterMessages(),
             locationRepository,
             explore
         );
 
-        ShowIntro showIntro = new ShowIntro(
-            mc.showIntroMessages(),
+        showIntro = new ShowIntro(
+            messageConfig.showIntroMessages(),
             gameProgressRepository,
             createCharacter,
             explore,
             quit
         );
 
-        return new Game(showIntro);
+        game = new Game(showIntro);
+    }
+    
+    public final RepositoryConfig repositoryConfig() {
+        return repositoryConfig;
     }
 
-    default MessageConfig messageConfig() {
-        return new MessageConfig();
+    public final Consumer<Long> sleep() {
+        return sleep;
+    }
+
+    public final Game game() {
+        return game;
+    }
+
+    public final MessageConfig messageConfig() {
+        return messageConfig;
+    }
+
+    public final SaveGame saveGame() {
+        return saveGame;
+    }
+
+    public final Quit quit() {
+        return quit;
+    }
+
+    public final Fight fight() {
+        return fight;
+    }
+
+    public final GameOver gameOver() {
+        return gameOver;
+    }
+
+    public final Explore explore() {
+        return explore;
+    }
+
+    public final CreateCharacter createCharacter() {
+        return createCharacter;
+    }
+
+    public final ShowIntro showIntro() {
+        return showIntro;
     }
 }
