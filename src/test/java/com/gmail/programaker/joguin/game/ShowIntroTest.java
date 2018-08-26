@@ -1,5 +1,6 @@
 package com.gmail.programaker.joguin.game;
 
+import com.gmail.programaker.joguin.config.TestConfig;
 import com.gmail.programaker.joguin.util.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class ShowIntroTest extends BaseTest {
     private final String start = "\n(N)ew Game, (Q)uit:\n";
     private final String startWithResume = "\n(N)ew Game, (R)esume, (Q)uit:\n";
     private final String errorInvalidOption = "Invalid option\n";
+    private final String welcomeBack = "\nWelcome back, commander Uhura! You have 500 points of experience.\n";
 
     @Autowired
     @Qualifier("ShowIntroMessages")
@@ -41,9 +43,6 @@ public class ShowIntroTest extends BaseTest {
 
     @Autowired
     private Quit quit;
-
-    @Autowired
-    private ShowIntro showIntro;
 
     @Test
     public void interactionsWithPlayerWithoutGameToResume() {
@@ -95,11 +94,20 @@ public class ShowIntroTest extends BaseTest {
 
     @Test
     public void whenThePlayerAsksToResumeGame() {
-        GameStep nextStep = showIntro(fullGameProgressRepository).start().interactWithPlayer(
-            blackHoleConsole,
+        List<String> fakeConsole = new ArrayList<>();
+
+        MockGameProgressRepository repo = new MockGameProgressRepository(false);
+        repo.save(beginProgress().increaseCharacterExperience(500));
+
+        GameStep nextStep = showIntro(repo).start().interactWithPlayer(
+            fakeConsole::add,
             Collections.singletonList("R").iterator()
         );
 
+        int i = 0;
+        assertEquals("Should have displayed the game intro", intro, fakeConsole.get(i++));
+        assertEquals("Should asked a start option", startWithResume, fakeConsole.get(i++));
+        assertEquals("Should have print welcome back message", welcomeBack, fakeConsole.get(i++));
         assertEquals("Should have gone to Explore step", "Explore", nextStep.name());
     }
 

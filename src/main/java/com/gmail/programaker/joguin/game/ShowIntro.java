@@ -66,7 +66,7 @@ public class ShowIntro {
             if (option.equals("r")) {
                 return repository.restore()
                     .map(progress -> welcomeBack(progress, print))
-                    .orElseGet(createCharacter::start);
+                    .orElseGet(createCharacter::start); //Unlikely to happen
             }
 
             if (option.equals("q")) {
@@ -77,7 +77,11 @@ public class ShowIntro {
         }
 
         private GameStep welcomeBack(GameProgress progress, Consumer<String> print) {
-            print.accept(Messages.get("welcome-back", messages, progress.getCharacter().getName()));
+            print.accept(Messages.get("welcome-back", messages,
+                progress.getCharacter().getName(),
+                progress.getCharacterExperience()
+            ));
+
             return explore.start(progress);
         }
 
