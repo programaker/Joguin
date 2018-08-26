@@ -1,8 +1,6 @@
 package com.gmail.programaker.joguin.game;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Optional;
 
 public class FileGameProgressRepository implements GameProgressRepository {
@@ -15,11 +13,13 @@ public class FileGameProgressRepository implements GameProgressRepository {
     @Override
     public boolean save(GameProgress gameProgress) {
         try {
-            if (savedProgressExists()) {
-                Files.delete(Paths.get(file.toURI()));
-            } else {
-                if (!file.mkdirs()) {
-                    return false;
+            if (!savedProgressExists()) {
+                File dir = file.getParentFile();
+
+                if (!dir.exists()) {
+                    if (!dir.mkdirs()) {
+                        return false;
+                    }
                 }
             }
 
