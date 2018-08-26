@@ -1,7 +1,4 @@
-package com.gmail.programaker.joguin.config;
-
-import com.gmail.programaker.joguin.game.progress.GameProgress;
-import com.gmail.programaker.joguin.game.progress.GameProgressRepository;
+package com.gmail.programaker.joguin.game.progress;
 
 import java.util.Optional;
 

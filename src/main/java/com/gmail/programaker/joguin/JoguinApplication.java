@@ -1,8 +1,8 @@
 package com.gmail.programaker.joguin;
 
-import com.gmail.programaker.joguin.config.GameComponents;
-import com.gmail.programaker.joguin.game.StandardGameComponents;
 import com.gmail.programaker.joguin.game.Game;
+import com.gmail.programaker.joguin.game.component.GameComponents;
+import com.gmail.programaker.joguin.game.component.StandardGameComponents;
 import com.gmail.programaker.joguin.game.step.GameStep;
 
 import java.nio.charset.StandardCharsets;

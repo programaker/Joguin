@@ -1,4 +1,4 @@
-package com.gmail.programaker.joguin.zorblax;
+package com.gmail.programaker.joguin.alien;
 
 import com.gmail.programaker.joguin.earth.city.City;
 

@@ -1,7 +1,7 @@
 package com.gmail.programaker.joguin.game.progress;
 
+import com.gmail.programaker.joguin.alien.Invasion;
 import com.gmail.programaker.joguin.earth.MainCharacter;
-import com.gmail.programaker.joguin.zorblax.Invasion;
 
 import java.io.Serializable;
 import java.util.ArrayList;

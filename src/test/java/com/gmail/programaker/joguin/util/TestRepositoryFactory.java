@@ -1,12 +1,13 @@
-package com.gmail.programaker.joguin.config;
+package com.gmail.programaker.joguin.util;
 
 import com.gmail.programaker.joguin.game.progress.GameProgressRepository;
+import com.gmail.programaker.joguin.game.progress.MockGameProgressRepository;
 
-public class TestRepositoryConfig extends StandardRepositoryConfig {
+public class TestRepositoryFactory extends StandardRepositoryFactory {
     private final boolean mockGameProgressSavingError;
     private final GameProgressRepository gameProgressRepository;
 
-    public TestRepositoryConfig(boolean mockGameProgressSavingError) {
+    public TestRepositoryFactory(boolean mockGameProgressSavingError) {
         this.mockGameProgressSavingError = mockGameProgressSavingError;
         this.gameProgressRepository = new MockGameProgressRepository(this.mockGameProgressSavingError);
     }

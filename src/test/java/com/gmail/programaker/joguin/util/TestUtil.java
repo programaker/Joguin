@@ -1,10 +1,10 @@
 package com.gmail.programaker.joguin.util;
 
-import com.gmail.programaker.joguin.earth.city.City;
+import com.gmail.programaker.joguin.alien.InvaderArmy;
+import com.gmail.programaker.joguin.alien.Invasion;
 import com.gmail.programaker.joguin.earth.MainCharacter;
+import com.gmail.programaker.joguin.earth.city.City;
 import com.gmail.programaker.joguin.game.progress.GameProgress;
-import com.gmail.programaker.joguin.zorblax.InvaderArmy;
-import com.gmail.programaker.joguin.zorblax.Invasion;
 
 import java.util.Arrays;
 import java.util.List;

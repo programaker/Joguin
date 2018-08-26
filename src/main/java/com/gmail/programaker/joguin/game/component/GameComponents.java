@@ -1,9 +1,11 @@
-package com.gmail.programaker.joguin.config;
+package com.gmail.programaker.joguin.game.component;
 
 import com.gmail.programaker.joguin.earth.city.CityRepository;
-import com.gmail.programaker.joguin.game.*;
+import com.gmail.programaker.joguin.game.Game;
 import com.gmail.programaker.joguin.game.progress.GameProgressRepository;
 import com.gmail.programaker.joguin.game.step.*;
+import com.gmail.programaker.joguin.util.MessageFactory;
+import com.gmail.programaker.joguin.util.RepositoryFactory;
 
 import java.util.function.Consumer;
 
@@ -15,33 +17,33 @@ public abstract class GameComponents {
     private final CreateCharacter createCharacter;
     private final ShowIntro showIntro;
     private final Game game;
-    private final RepositoryConfig repositoryConfig;
+    private final RepositoryFactory repositoryFactory;
 
-    public GameComponents(RepositoryConfig repositoryConfig, Consumer<Long> sleep) {
-        this.repositoryConfig = repositoryConfig;
+    public GameComponents(RepositoryFactory repositoryFactory, Consumer<Long> sleep) {
+        this.repositoryFactory = repositoryFactory;
 
-        MessageConfig messageConfig = new MessageConfig();
-        CityRepository cityRepository = repositoryConfig.cityRepository();
-        GameProgressRepository gameProgressRepository = repositoryConfig.gameProgressRepository();
+        MessageFactory messageFactory = new MessageFactory();
+        CityRepository cityRepository = repositoryFactory.cityRepository();
+        GameProgressRepository gameProgressRepository = repositoryFactory.gameProgressRepository();
 
         GameOver gameOver = new GameOver();
 
         saveGame = new SaveGame(
-            messageConfig.saveGameMessages(),
+            messageFactory.saveGameMessages(),
             gameProgressRepository,
             gameOver
         );
 
         quit = new Quit(
-            messageConfig.quitMessages(),
+            messageFactory.quitMessages(),
             saveGame,
             gameOver
         );
 
         //These two have a circular dependency =(
-        fight = new Fight(messageConfig.fightMessages(), sleep);
+        fight = new Fight(messageFactory.fightMessages(), sleep);
         explore = new Explore(
-            messageConfig.exploreMessages(),
+            messageFactory.exploreMessages(),
             sleep,
             fight,
             gameOver,
@@ -50,13 +52,13 @@ public abstract class GameComponents {
         fight.setExplore(explore);
 
         createCharacter = new CreateCharacter(
-            messageConfig.createCharacterMessages(),
+            messageFactory.createCharacterMessages(),
             cityRepository,
             explore
         );
 
         showIntro = new ShowIntro(
-            messageConfig.showIntroMessages(),
+            messageFactory.showIntroMessages(),
             gameProgressRepository,
             createCharacter,
             explore,
@@ -66,8 +68,8 @@ public abstract class GameComponents {
         game = new Game(showIntro);
     }
     
-    public final RepositoryConfig repositoryConfig() {
-        return repositoryConfig;
+    public final RepositoryFactory repositoryConfig() {
+        return repositoryFactory;
     }
 
     public final Game game() {

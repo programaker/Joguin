@@ -1,14 +1,12 @@
-package com.gmail.programaker.joguin.game;
+package com.gmail.programaker.joguin.game.step;
 
-import com.gmail.programaker.joguin.config.TestGameComponents;
-import com.gmail.programaker.joguin.earth.city.City;
+import com.gmail.programaker.joguin.alien.Invasion;
+import com.gmail.programaker.joguin.alien.TerraformDevice;
 import com.gmail.programaker.joguin.earth.MainCharacter;
+import com.gmail.programaker.joguin.earth.city.City;
+import com.gmail.programaker.joguin.game.component.TestGameComponents;
 import com.gmail.programaker.joguin.game.progress.GameProgress;
-import com.gmail.programaker.joguin.game.step.Fight;
-import com.gmail.programaker.joguin.game.step.GameStep;
 import com.gmail.programaker.joguin.util.BaseTest;
-import com.gmail.programaker.joguin.zorblax.Invasion;
-import com.gmail.programaker.joguin.zorblax.TerraformDevice;
 import org.junit.Test;
 
 import java.text.MessageFormat;

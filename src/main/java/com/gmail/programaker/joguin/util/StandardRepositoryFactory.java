@@ -1,13 +1,13 @@
-package com.gmail.programaker.joguin.config;
+package com.gmail.programaker.joguin.util;
 
-import com.gmail.programaker.joguin.earth.city.HardcodedCityRepository;
 import com.gmail.programaker.joguin.earth.city.CityRepository;
+import com.gmail.programaker.joguin.earth.city.HardcodedCityRepository;
 import com.gmail.programaker.joguin.game.progress.FileGameProgressRepository;
 import com.gmail.programaker.joguin.game.progress.GameProgressRepository;
 
 import java.io.File;
 
-public class StandardRepositoryConfig implements RepositoryConfig {
+public class StandardRepositoryFactory implements RepositoryFactory {
     @Override
     public CityRepository cityRepository() {
         return new HardcodedCityRepository();

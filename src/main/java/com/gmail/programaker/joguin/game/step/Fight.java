@@ -1,11 +1,11 @@
 package com.gmail.programaker.joguin.game.step;
 
+import com.gmail.programaker.joguin.alien.Invasion;
+import com.gmail.programaker.joguin.alien.TerraformDevice;
 import com.gmail.programaker.joguin.earth.MainCharacter;
 import com.gmail.programaker.joguin.game.progress.GameProgress;
 import com.gmail.programaker.joguin.util.AskPlayer;
 import com.gmail.programaker.joguin.util.Messages;
-import com.gmail.programaker.joguin.zorblax.Invasion;
-import com.gmail.programaker.joguin.zorblax.TerraformDevice;
 
 import java.util.Iterator;
 import java.util.Properties;

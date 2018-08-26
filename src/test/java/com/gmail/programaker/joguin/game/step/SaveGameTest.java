@@ -1,10 +1,10 @@
-package com.gmail.programaker.joguin.game;
+package com.gmail.programaker.joguin.game.step;
 
-import com.gmail.programaker.joguin.config.*;
+import com.gmail.programaker.joguin.game.component.GameComponents;
+import com.gmail.programaker.joguin.game.component.TestGameComponents;
 import com.gmail.programaker.joguin.game.progress.GameProgressRepository;
-import com.gmail.programaker.joguin.game.step.GameStep;
-import com.gmail.programaker.joguin.game.step.SaveGame;
 import com.gmail.programaker.joguin.util.BaseTest;
+import com.gmail.programaker.joguin.util.TestRepositoryFactory;
 import com.gmail.programaker.joguin.util.TestUtil;
 import org.junit.Test;
 
@@ -70,7 +70,7 @@ public class SaveGameTest extends BaseTest {
 
     private static final class SaveGameErrorGameComponents extends GameComponents {
         private SaveGameErrorGameComponents() {
-            super(new TestRepositoryConfig(true), TestUtil.sleep);
+            super(new TestRepositoryFactory(true), TestUtil.sleep);
         }
     }
 }

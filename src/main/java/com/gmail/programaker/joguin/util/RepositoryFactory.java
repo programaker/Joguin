@@ -1,9 +1,9 @@
-package com.gmail.programaker.joguin.config;
+package com.gmail.programaker.joguin.util;
 
 import com.gmail.programaker.joguin.earth.city.CityRepository;
 import com.gmail.programaker.joguin.game.progress.GameProgressRepository;
 
-public interface RepositoryConfig {
+public interface RepositoryFactory {
     CityRepository cityRepository();
     GameProgressRepository gameProgressRepository();
 }
