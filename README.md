@@ -15,6 +15,7 @@ and save the world.
 ## Requirements
 
 * Java 8+
+* Maven 3.3+
 * A command line interface
 
 ## Building
