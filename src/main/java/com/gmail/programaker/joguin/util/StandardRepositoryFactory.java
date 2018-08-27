@@ -7,6 +7,7 @@ import com.gmail.programaker.joguin.game.progress.GameProgressRepository;
 
 import java.io.File;
 
+/** RepositoryFactory implementation that creates the standard Repositories */
 public class StandardRepositoryFactory implements RepositoryFactory {
     @Override
     public CityRepository cityRepository() {

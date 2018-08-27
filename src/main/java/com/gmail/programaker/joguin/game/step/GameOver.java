@@ -3,6 +3,7 @@ package com.gmail.programaker.joguin.game.step;
 import java.util.Iterator;
 import java.util.function.Consumer;
 
+/** The final step of the game that makes it end */
 public class GameOver implements GameStep {
     @Override
     public String name() {

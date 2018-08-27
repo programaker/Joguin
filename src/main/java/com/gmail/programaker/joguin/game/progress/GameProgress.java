@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/** Represents the player's progress through the game,
+ * the gained experience, saved cities, etc */
 public class GameProgress implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -42,6 +44,8 @@ public class GameProgress implements Serializable {
     }
 
     public Invasion getInvasion(int selectedInvasion) {
+        //1-based index, to match the invasion list as the player sees it
+        //and also the player's input when select an invasion to fight
         return invasions.get(index(selectedInvasion));
     }
 
@@ -58,6 +62,8 @@ public class GameProgress implements Serializable {
         Invasion invasion = getInvasion(selectedInvasion);
 
         if (invasion.isAlienDominatedCity()) {
+            //Invasion is immutable to forbid changes outside GameProgress
+            //So an invasion must be replaced by its defeated counterpart
             invasions.set(index(selectedInvasion), invasion.defeated());
             defeatedInvasions++;
         }

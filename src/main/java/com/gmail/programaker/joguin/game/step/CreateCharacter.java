@@ -1,6 +1,6 @@
 package com.gmail.programaker.joguin.game.step;
 
-import com.gmail.programaker.joguin.alien.InvaderArmy;
+import com.gmail.programaker.joguin.alien.AlienArmy;
 import com.gmail.programaker.joguin.alien.Invasion;
 import com.gmail.programaker.joguin.earth.MainCharacter;
 import com.gmail.programaker.joguin.earth.city.CityRepository;
@@ -15,6 +15,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/** Starts a create character step hiding its dependencies from the caller step */
 public class CreateCharacter {
     private final Properties messages;
     private final CityRepository cityRepository;
@@ -89,7 +90,7 @@ public class CreateCharacter {
         private GameProgress initGameProgress(MainCharacter character) {
             List<Invasion> invasions = cityRepository.findAll()
                 .stream()
-                .map(InvaderArmy::invade)
+                .map(AlienArmy::attack)
                 .collect(Collectors.toList());
 
             return new GameProgress(character, invasions);

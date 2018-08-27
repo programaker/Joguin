@@ -6,7 +6,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.Properties;
 
+/** Creates the message properties for the game steps */
 public class MessageFactory {
+    //This opens the possibility of internationalization,
+    //but it only knows english for now
     private final Locale locale = Locale.US;
 
     public Properties createCharacterMessages() {

@@ -4,6 +4,10 @@ import com.gmail.programaker.joguin.earth.city.City;
 
 import java.io.Serializable;
 
+/** The result of an alien army attacking a city.
+ *
+ * After the invasion, the city is completely dominated by the aliens
+ * and got a Terraform Device installed in it */
 public class Invasion implements Serializable {
     private static final long serialVersionUID = 1L;
     private final TerraformDevice terraformDevice;

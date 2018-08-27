@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class InvasionTest extends BaseTest {
     @Test
     public void whenDefeated() {
-        Invasion invasion = InvaderArmy.invade(new City("Osasco", "Brazil"));
+        Invasion invasion = AlienArmy.attack(new City("Osasco", "Brazil"));
         Invasion defeatedInvasion = invasion.defeated();
 
         assertTrue("An Invasion completelly dominates a city", invasion.isAlienDominatedCity());

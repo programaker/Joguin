@@ -9,6 +9,12 @@ import com.gmail.programaker.joguin.util.RepositoryFactory;
 
 import java.util.function.Consumer;
 
+/** Creates and makes game components (game steps, factories, etc) available to other classes.
+ *
+ * It is abstract to force the creation of derived classes that are meant to hide
+ * concrete dependencies (and their changes) from the external world
+ * (like repository factories, sleep function, etc)
+ * */
 public abstract class GameComponents {
     private final SaveGame saveGame;
     private final Quit quit;
@@ -41,6 +47,9 @@ public abstract class GameComponents {
         );
 
         //These two have a circular dependency =(
+        //
+        //Luckily, GameComponents hides this dirty little secret
+        //from the external world
         fight = new Fight(messageFactory.fightMessages(), sleep);
         explore = new Explore(
             messageFactory.exploreMessages(),

@@ -3,6 +3,7 @@ package com.gmail.programaker.joguin.game.progress;
 import java.io.*;
 import java.util.Optional;
 
+/** GameProgressRepository implementation that persists the last GameProgress in a file */
 public class FileGameProgressRepository implements GameProgressRepository {
     private final File file;
 

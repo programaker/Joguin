@@ -8,6 +8,8 @@ import java.util.Iterator;
 import java.util.Properties;
 import java.util.function.Consumer;
 
+/** Starts a quit step hiding its dependencies from the caller step.
+ * This way, the caller step only need to pass its product to the quit */
 public class Quit {
     private final Properties messages;
     private final SaveGame saveGame;

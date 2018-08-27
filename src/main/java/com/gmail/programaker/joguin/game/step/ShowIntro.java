@@ -10,6 +10,7 @@ import java.util.Properties;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+/** Starts a show intro step, the very beginning of the game. */
 public class ShowIntro {
     private final Properties messages;
     private final GameProgressRepository repository;
@@ -63,14 +64,16 @@ public class ShowIntro {
             if (option.equals("r")) {
                 return repository.restore()
                     .map(progress -> welcomeBack(progress, print))
-                    .orElseGet(createCharacter::start); //Unlikely to happen
+                    .orElseGet(createCharacter::start);
             }
 
             if (option.equals("q")) {
                 return quit.start();
             }
 
-            return null; //Very very unlikely to happen
+            //Very unlikely to happen, thanks to AskPlayer behavior to repeat itself
+            //until a valid input is given, but we need to make our friend compiler happy
+            return null;
         }
 
         private GameStep welcomeBack(GameProgress progress, Consumer<String> print) {

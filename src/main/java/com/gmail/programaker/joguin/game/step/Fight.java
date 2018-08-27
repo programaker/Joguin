@@ -11,6 +11,14 @@ import java.util.Iterator;
 import java.util.Properties;
 import java.util.function.Consumer;
 
+/** Starts fight step hiding its dependencies from the caller step.
+ * This way, the caller step only need to pass its product to the fight.
+ *
+ * The circular dependency between it and Explore represents the flow:
+ * -> Explore the cities
+ * -> Select one
+ * -> If invaded, fight or retreat
+ * -> Repeat */
 public class Fight {
     private final Properties messages;
     private final Consumer<Long> sleep;

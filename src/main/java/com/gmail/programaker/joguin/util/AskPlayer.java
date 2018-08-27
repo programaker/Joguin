@@ -5,6 +5,15 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+/** Utility class to reuse the following flow in all game steps:
+ *
+ * Ask something from player
+ * -> Read response
+ * -> Parse response
+ * -> Validate parsed response
+ * -> Tell player about the error
+ * -> Repeat until the player give a valida answer
+ * */
 public final class AskPlayer {
     public static <T> T to(
         String question,

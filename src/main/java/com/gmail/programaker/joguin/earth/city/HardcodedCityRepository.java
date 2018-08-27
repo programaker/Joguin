@@ -3,6 +3,7 @@ package com.gmail.programaker.joguin.earth.city;
 import java.util.Arrays;
 import java.util.List;
 
+/** CityRepository implementation that uses a simple List to store the cities */
 public class HardcodedCityRepository implements CityRepository {
     private static final List<City> ALL_CITIES = Arrays.asList(
         new City("Berlin", "Germany"),

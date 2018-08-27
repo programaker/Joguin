@@ -7,17 +7,17 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class InvaderArmyTest extends BaseTest {
+public class AlienArmyTest extends BaseTest {
     private CityRepository cityRepository;
 
-    public InvaderArmyTest() {
+    public AlienArmyTest() {
         cityRepository = new TestGameComponents().repositoryFactory().cityRepository();
     }
 
     @Test
     public void whenInvadingEarthCities() {
         cityRepository.findAll().forEach(city -> {
-            Invasion invasion = InvaderArmy.invade(city);
+            Invasion invasion = AlienArmy.attack(city);
             TerraformDevice device = invasion.getTerraformDevice();
 
             int defensePower = device.getDefensePower();

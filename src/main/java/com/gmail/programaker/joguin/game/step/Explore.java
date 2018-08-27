@@ -12,6 +12,8 @@ import java.util.Properties;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+/** Starts an explore step hiding its dependencies from the caller step.
+ * This way, the caller step only need to pass its product to the explore */
 public class Explore {
     private final Properties messages;
     private final Consumer<Long> sleep;

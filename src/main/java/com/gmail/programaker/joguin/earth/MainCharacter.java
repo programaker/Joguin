@@ -32,7 +32,7 @@ public class MainCharacter implements Serializable {
     }
 
     public enum Gender {
-        NONE(""),
+        NONE(""), //Acts like a null Gender (Null Object pattern)
         FEMALE("F"),
         MALE("M"),
         OTHER("O"),
@@ -54,6 +54,7 @@ public class MainCharacter implements Serializable {
             return code;
         }
 
+        //To get a Gender by its code more easily and in O(1) time
         private static final Map<String, Gender> gendersByCode =
             Arrays.stream(Gender.values()).collect(Collectors.toMap(Gender::getCode, Function.identity()));
     }
